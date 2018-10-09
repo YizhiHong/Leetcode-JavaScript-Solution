@@ -10,12 +10,21 @@ Output: [3,4]
 
 **/
 
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
 var searchRange = function(nums, target) {
     let res = [-1,-1]
-    let lo = 0, hi = nums.length - 1
-    let mid;
+    if(nums.length === 0) return res
+    
+    let lo = 0, 
+        hi = nums.length - 1,
+        mid;
+    
     while(lo <= hi){
-        mid = ~~((lo+hi)/2)
+        mid = (lo+hi) >>1
         if(nums[mid] >= target){
             hi = mid - 1
         }else{
@@ -31,7 +40,7 @@ var searchRange = function(nums, target) {
     hi = nums.length - 1
     
     while(lo <= hi){
-        mid = ~~((lo+hi)/2)
+        mid = (lo+hi) >>1
         if(nums[mid] > target){
             hi = mid - 1
         }else{
