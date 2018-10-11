@@ -8,7 +8,7 @@
 
 /**
  * Encodes a tree to a single string.
- *
+ * 
  * @param {TreeNode} root
  * @return {string}
  */
@@ -29,6 +29,29 @@ var serialize = function(root) {
         
     return result
 };
+
+// Iterative version serialize
+var serialize_ = function(root) {
+    let result = "",
+        stack = [],
+        curr = root
+    
+    while( curr !== null || stack.length > 0){
+        if(curr !== null){
+            result = result + curr.val  +  ','
+            stack.push(curr)
+            curr = curr.left
+        }else{
+            curr = stack.pop()
+            result = result + 'null,'
+            curr = curr.right
+        }
+       
+    }
+    
+    return result + "null,"
+};
+
 
 /**
  * Decodes your encoded data to tree.

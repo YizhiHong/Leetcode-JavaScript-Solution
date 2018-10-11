@@ -19,3 +19,29 @@ var invertTree = function(root) {
 	root.right = left
 	return root
 };
+
+/**
+DFS Iterative
+ */
+var invertTree = function(root) {
+    if(root === null) return null
+    
+	let stack = [],
+        curr = root,
+        temp = null
+    
+    stack.push(root)
+    
+    while(stack.length > 0){
+        curr = stack.pop()
+        temp = curr.left
+        curr.left = curr.right
+        curr.right = temp
+        
+        if(curr.left !== null) stack.push(curr.left)
+        if(curr.right !== null) stack.push(curr.right)
+        
+    }
+    return root
+    
+};
