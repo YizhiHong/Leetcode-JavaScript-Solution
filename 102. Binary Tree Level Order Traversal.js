@@ -41,6 +41,7 @@ var levelOrder = function(root) {
     return result
 };
 
+// recursive
 var levelOrder = function(root) {
     if (root === null) return []
     let res = []
@@ -54,5 +55,33 @@ var levelOrder = function(root) {
     }
     
     dfs(res,root,0)
+    return res
+};
+
+// other method 
+var postorderTraversal = function(root) {
+    if (root === null) return []
+    let res = [],
+        stack = [],
+        curr = root,
+        prev;
+        
+    while(curr !== null || stack.length > 0){
+        while(curr !== null){
+            stack.push(curr)
+            curr = curr.left
+        }
+        
+        curr = stack[stack.length-1]
+        if(curr.right && curr.right !== prev){
+            curr = curr.right
+        }else{
+            stack.pop()
+            res.push(curr.val)
+            prev = curr
+            curr = null
+        }
+    }
+    
     return res
 };

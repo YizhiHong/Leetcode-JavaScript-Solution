@@ -14,8 +14,6 @@ The array may contain duplicates.
         hi = nums.length -1,
         mid;
     
-    // if(nums[lo] < nums[hi]) return nums[lo]
-
     while(lo < hi){
         mid = (lo+hi) >>1
         if(nums[hi] > nums[mid]){
