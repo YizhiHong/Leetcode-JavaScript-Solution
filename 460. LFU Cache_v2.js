@@ -73,6 +73,7 @@ class LFUCache {
     }
     
 }
+/** assets **/
 /** 
  * Node object
  * @param {number} key
@@ -89,14 +90,6 @@ class node {
     }
 }
 
-/** 
- * Your LFUCache object will be instantiated and called as such:
- * var obj = Object.create(LFUCache).createNew(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
-
-/** assets **/
 class Comparator {
   /**
    * @param {function(a: *, b: *)} [compareFunction]
@@ -136,10 +129,7 @@ class DoublyLinkedList {
    * @param {Function} [comparatorFunction]
    */
   constructor(comparatorFunction) {
-    /** @var DoublyLinkedListNode */
     this.head = null;
-
-    /** @var DoublyLinkedListNode */
     this.tail = null;
 
     this.compare = new Comparator(comparatorFunction);
