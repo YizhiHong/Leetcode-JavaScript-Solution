@@ -29,3 +29,20 @@ var rotate = function(matrix) {
     }
     
 };
+// better way(copy from leetcode)
+var rotate = function(matrix) {
+    
+    for(let i = 0; i <= Math.floor(matrix.length/2); i++) {
+        for(let j = i; j < matrix.length - 1 - i; j++) {
+            let length = matrix.length
+            
+            let tmp = matrix[i][j]
+            matrix[i][j] = matrix[length-1-j][i]
+            matrix[length-1-j][i] = matrix[length-1-i][length-1-j]
+            matrix[length-1-i][length-1-j] = matrix[j][length-1-i]
+            matrix[j][length-1-i] = tmp
+        }
+    }
+
+    
+};
