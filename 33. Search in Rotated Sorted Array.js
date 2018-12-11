@@ -24,7 +24,6 @@ Output: -1
  * @return {number}
  */
 
- 
 var search = function(nums, target) {
     let lo = 0,
         hi = nums.length - 1,
@@ -32,11 +31,12 @@ var search = function(nums, target) {
     
     while (lo <= hi) {
         mid = (lo+hi) >> 1
-        //if target and mid on same side
-        if( (nums[mid] < nums[0]) === (target < nums[0])){
-            if(nums[mid] === target){
+        if(nums[mid] === target){
                 return mid
-            }else if(nums[mid] < target){
+        }
+        // if target and mid on same side
+        if( (nums[mid] < nums[0]) === (target < nums[0])){
+            if(nums[mid] < target){
                 lo = mid +1
             }else{
                 hi = mid -1
@@ -50,6 +50,5 @@ var search = function(nums, target) {
             
         }
     }
-    
     return target === nums[lo] ? lo : -1
 };

@@ -34,7 +34,6 @@ var search = function(nums, target) {
         mid = (lo + hi)>>1;
         if(nums[mid] === target) return true
         
-        // if same skip 
         if(nums[mid] === nums[lo]) {
             lo++
         }else if( (nums[mid] < nums[lo]) === (target < nums[lo])){
@@ -53,5 +52,5 @@ var search = function(nums, target) {
         }
     }
     
-    return target === nums[lo] ? true : false
+    return false
 };
