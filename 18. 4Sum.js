@@ -61,6 +61,7 @@ var fourSum = function(nums, target) {
     nums.sort((a,b)=>a-b)
     
     for(let i=0;i< lens-3;i++){
+
         if(nums[i]+nums[i+1]+nums[i+2]+nums[i+3] >target) break;
         
         if(nums[i]+nums[lens-1] +nums[lens-2] +nums[lens-3] < target) continue;
@@ -83,6 +84,7 @@ var fourSum = function(nums, target) {
                 if(sum === target){
                     
                     res.push([nums[i],nums[j],nums[start],nums[end]])
+                    
                     while(nums[start]===nums[start+1]) start++
                     while(nums[end]===nums[end-1]) end--
                 }
