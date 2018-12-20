@@ -15,8 +15,6 @@ function ListNode(val) {
 }
 
 
-
-
 var reverseBetween = function(head, m, n) {
     let ret = new ListNode(null)
     ret.next = head
