@@ -64,3 +64,26 @@ var isHappy = function(n) {
     }
     return true
 };
+
+/**
+*/
+var isHappy = function(n) {
+    let res = n, presented = new Set()
+    
+    while(res !== 1){
+        let total = 0, len = res.toString().length
+        
+        for(let i = 0; i < len; i++){
+            let digit = res%10
+            total = total + digit**2
+            res = ~~(res/10)
+        }
+        res = total
+        if(presented.has(res)) {
+            return false
+        }else{
+            presented.add(res)
+        }
+    }
+    return true
+};

@@ -65,5 +65,42 @@ var reverseKGroup = function(head, k) {
         count = 0
     }
     return root.next
+};
+
+// solution 2: stack - O(n) O(k)
+var reverseKGroup = function(head, k) {
+    let root = new ListNode(null)
+    root.next = head
+    
+    let stack = [],
+        curr = root.next,
+        prev = root,
+        temp 
+    
+    while(true){
+        // push the k group node in stack
+        for(let i=0; i < k && curr !== null; i++){
+            stack.push(curr)
+            curr = curr.next
+        }
+
+        if(stack.length < k) return root.next // return if the number of last group less than k
+        
+        temp = curr // store the next point prevent connetion lost
+        curr = stack.pop() // pop last node
+        prev.next = curr // connect the prev node to the last node
+        
+        //pop until empty
+        while(stack.length !== 0){
+            let p = stack.pop()
+            curr.next = p
+            curr = p
+        }
+        
+        curr.next = temp // connect to next point that we stored previously
+        // move to next iteration
+        prev = curr 
+        curr = temp
+    }
     
 };
