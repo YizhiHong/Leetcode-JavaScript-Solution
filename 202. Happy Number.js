@@ -8,6 +8,9 @@ Explanation:
 62 + 82 = 100
 12 + 02 + 02 = 1
  */
+ /**
+    O(n) O(n)
+ */
 var isHappy = function(n) {
     let appearMap = new Map();
     let strs = n.toString().split("")
