@@ -56,7 +56,9 @@ var intToRoman = function(num) {
 };
 
 
-// faster way
+// faster way O(n)
+
+
 
 var intToRoman = function(num) {
     let dict = [['1000', 'M'],
