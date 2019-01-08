@@ -42,7 +42,7 @@ Output: "MCMXCIV"
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 */
 
-//solution 1: tricky way
+//solution 1: tricky way  O(n)
 
 
 
@@ -57,7 +57,6 @@ var intToRoman = function(num) {
 
 
 // faster way O(n)
-
 
 
 var intToRoman = function(num) {
