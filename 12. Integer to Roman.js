@@ -43,7 +43,6 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 */
 
 //solution 1: tricky way  O(n)
-
 var intToRoman = function(num) {
     let M = ["", "M", "MM", "MMM"],
         C = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"],
@@ -55,8 +54,6 @@ var intToRoman = function(num) {
 
 
 // faster way O(n)
-
-
 var intToRoman = function(num) {
     let dict = [['1000', 'M'],
                 ['900', 'CM'],
