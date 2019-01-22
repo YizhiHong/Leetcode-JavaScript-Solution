@@ -43,6 +43,7 @@ Explanation: The number "-91283472332" is out of the range of a 32-bit signed in
  * @param {string} str
  * @return {number}
  */
+ // O(n) str.length O(1)
 var myAtoi = function(str) {
     let res = str.trim()  // remove the space of start/end
     if(res.length === 0) return 0
@@ -65,4 +66,21 @@ var myAtoi = function(str) {
     }
     if(num === "") num = 0
     return checkOverflow(start === "+" || start === "-" ? Number(start+num) : Number(num))
+};
+
+// reg expression approach
+
+var myAtoi = function(str) {
+    let res = str.trim()  // remove the space of start/end
+    let tmp = /^(\-|\+)?[0-9]+/.exec(res); //reg
+    
+    const checkOverflow = (n) => {
+        if((n) > 2**31 - 1) return 2**31 - 1
+        if((n) < (-2)**31) return (-2)**31
+        return (n)
+    }
+    if (tmp) {
+        return checkOverflow(Number(tmp[0]));
+    }
+    return 0
 };
