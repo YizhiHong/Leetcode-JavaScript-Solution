@@ -27,3 +27,28 @@ var toHex = function(num) {
     }
     return res
 };
+
+//** method 2
+
+var toHex = function(num) {
+    const hex = (d) =>{
+        let r = d % 16;
+        if (d - r == 0) {
+            return toChar(r);
+        }
+        return hex((d - r)/16 ) + toChar(r);
+    }
+  
+    const toChar = (n) => {
+        const alpha = "0123456789abcdef";
+        return alpha.charAt(n);
+    }
+    
+    if (num < 0) {
+        num += 2**32
+    }
+    
+    return hex(num)
+    
+    
+};d
