@@ -37,7 +37,9 @@ The graph is undirected: if any element j is in graph[i], then i will be in grap
  * @return {boolean}
  */
 
- // switch color way! BFS Time: O(V+E) space: O(V)
+
+
+ // switch color way array BFS Time: O(V+E) space: O(V) 
 var isBipartite = function(graph) {
     let color = [] // 0:white, 1:blue
     
@@ -62,5 +64,27 @@ var isBipartite = function(graph) {
     }
     
     return true
-    
 };
+var isBipartite = function(graph) {
+    let color = new Map() // 0:white, 1:blue
+    color.set(0,0)
+    for (let i = 0;  i< graph.length; i++){
+        let queue = []
+        queue.push(i)
+        while(queue.length !== 0){            
+            let curr = queue.shift()
+            for(let j of graph[curr]){
+                if(!color.has(j)){
+                    color.set(j,color.get(curr) ^ 1) // switch the color
+                    queue.push(j)
+                }else if(color.get(j) === color.get(curr)){
+                    return false
+                }
+            }
+            
+        }
+    }
+    return true
+};
+
+// DFS
