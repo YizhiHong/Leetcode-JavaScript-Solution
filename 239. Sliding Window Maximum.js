@@ -49,3 +49,26 @@ var maxSlidingWindow = function(nums, k) {
     
     return res  
 };
+// O(n)
+
+var maxSlidingWindow = function(nums, k) {
+    if(nums.length === 0) return []
+     // sort the first window and apply to result
+    let queue = [],
+        res = []
+    
+    
+    for(let i = 0; i< nums.length;i++){
+        let firstIdx =  i - k + 1
+        // remove index below the window
+        while(queue.length && queue[queue.length-1] < nums[i]){
+            queue.pop()
+        }
+        queue.push(nums[i])
+        if(firstIdx < 0) continue
+        res.push(queue[0])
+        if(queue.length && nums[firstIdx] === queue[0]) queue.shift()
+    }
+    
+    return res  
+};
