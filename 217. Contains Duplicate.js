@@ -9,7 +9,17 @@ var containsDuplicate = function(nums) {
 };
 
 /** O(n) O(n) */
-
+var containsDuplicate = function(nums) {
+    let checkSet = new Set()
+    for(let num of nums){
+        if(checkSet.has(num)){
+            return true
+        }else{
+            checkSet.add(num)
+        }   
+    }
+    return false
+};
 
 /** Method 2: sort */
 
