@@ -17,7 +17,7 @@ function TreeNode(val) {
 var inorderTraversal = function(root) {
     let res = []
     let inorder = (curr) => {
-        if(curr === null) return null
+        if(curr === null) return;
         inorder(curr.left)
         res.push(curr.val)
         inorder(curr.right)
