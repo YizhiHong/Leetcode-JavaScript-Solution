@@ -15,21 +15,16 @@ function TreeNode(val) {
 
 /** Recursive */
 var inorderTraversal = function(root) {
-    let number = []
-    if (root === null) { return number }
-    var inorder = function (node) {
-        if (node.left !== null){
-            inorder(node.left)
-        }
-        number.push(node.val)
-        if (node.right !== null){
-            inorder(node.right)
-        }
+    let res = []
+    let inorder = (curr) => {
+        if(curr === null) return null
+        inorder(curr.left)
+        res.push(curr.val)
+        inorder(curr.right)
     }
     inorder(root)
-    return number
+    return res
 };
-
 /** Iterative */
 
 var inorderTraversal = function(root) {
