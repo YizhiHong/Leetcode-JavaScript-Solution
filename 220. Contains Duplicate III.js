@@ -50,8 +50,105 @@ var containsNearbyAlmostDuplicate = function(nums, k, t) {
 
  /** solution 2: binary search tree -> no provided in es6, prefer to use java TreeSet
  	O(nlogk) O(k)
+
+ 	ref: leetcode others solution
  */
 
 
+class TreeNode {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
 
+var insertIntoBST = function (root, val) {
+    if (root === null) {
+        return new _____1.TreeNode(val);
+    }
+    let node = root;
+    while (node) {
+        if (node.value > val) {
+            if (node.left === null) {
+                node.left = new TreeNode(val);
+                break;
+            }
+            else {
+                node = node.left;
+            }
+        }
+        if (node.value < val) {
+            if (node.right === null) {
+                node.right = new TreeNode(val);
+                break;
+            }
+            else {
+                node = node.right;
+            }
+        }
+    }
+    return root;
+};
+
+const deleteNode = function (root, key) {
+    if (root === null) {
+        return null;
+    }
+    if (root.value > key) { //寻找结点
+        root.left = deleteNode(root.left, key);
+    }
+    else if (root.value < key) {
+        root.right = deleteNode(root.right, key);
+    }
+    else {
+        if (root.left !== null && root.right !== null) {
+            let leftMax = root.left;
+            while (leftMax.right) {
+                leftMax = leftMax.right;
+            }
+            root.value = leftMax.value;
+            root.left = deleteNode(root.right, leftMax.value);
+        } //寻找左树最大值替换根结点
+        else {
+            return root.left === null ? root.right : root.left;
+        } //如果是单子树的结点，返回结点，叶节点返回null;
+    }
+    return root;
+};
+
+var containsNearbyAlmostDuplicate = function (nums, k, t) {
+    if(t<0|| k <= 0){
+        return false;
+    }
+    let root = new TreeNode(nums[0]);
+    let cnt = 1;
+    const findNear = function (root, value, t) {
+        if (root === null) {
+            return false;
+        }
+        let dist = Math.abs(root.value - value);
+        if (dist <= t) {
+            return true;
+        }
+        else if (value > root.value) {
+            return findNear(root.right, value, t);
+        }
+        else {
+            return findNear(root.left, value, t);
+        }
+    }; //找到二叉搜索树中的最小差值,如果这个差值小于等于t,就是存在i,j
+    for (let i = 1; i < nums.length; i++) {
+        if (findNear(root, nums[i], t)) {
+            return true;
+        }
+        root=insertIntoBST(root, nums[i]);
+        cnt++;
+        if (cnt === k + 1) {
+            root=deleteNode(root, nums[i - k]);
+            cnt--;
+        }
+    }
+    return false;
+};
 
