@@ -46,7 +46,37 @@ var findMode = function(root) {
     });
     return Array.from(arr)
 };
+// Solution 2: O(n) O(1)
 
+var findMode = function(root) {
+    let res = [],
+        count = 1,
+        maxCount = 0,
+        prev = null
+    
+    const inOrder = (curr) =>{
+        if(!curr) return;
+        
+        inOrder(curr.left)
+        
+        if(prev !== null) {
+            count = (prev === curr.val) ? count + 1 : 1
+        }
+        if(count >= maxCount){
+            if (count > maxCount) res = []
+            res.push(curr.val)
+            maxCount = count
+        }
+        prev = curr.val
+        
+        inOrder(curr.right)
+    }
+    
+    inOrder(root)
+    
+    return res
+        
+};
 
 
 
