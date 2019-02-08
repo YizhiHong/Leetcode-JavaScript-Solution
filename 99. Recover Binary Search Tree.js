@@ -14,19 +14,19 @@
 var recoverTree = function(root) {
     
     let prev = null,
-        cur = null,
+        temp = null,
         res = []
     
     let inOrder = (curr) => {
         if(!curr) return;
         inOrder(curr.left)
-        prev = cur
-        cur = curr
-        if (prev && prev.val > cur.val){
+        prev = temp
+        temp = curr
+        if (prev && prev.val > temp.val){
             if(res.length === 0){
-                res.push(...[prev,cur])
+                res.push(...[prev,temp])
             }else{
-                res[1] = cur
+                res[1] = temp
             }
         }        
         inOrder(curr.right)
@@ -38,7 +38,50 @@ var recoverTree = function(root) {
     res[1].val = temp   
 };
 
-// O(n) O(1) Morris traversal
-
+// O(n) O(1) ref:https://www.youtube.com/watch?v=QZMropFflv4
+// Morris traversal:https://www.youtube.com/watch?v=wGXB9OWhPTg
+var recoverTree = function(root) {
+    let prev = null, curr = root, rev = []
+    
+    const swap = (a,b) =>{
+        let t = a.val
+        a.val = b.val
+        b.val = t
+    }
+    
+    const findSwapped = (node) => {
+        if(prev && prev.val > node.val){
+            rev.length === 0 ? rev.push(...[prev,node]) : rev[1] = node
+        }
+        prev = node
+    }
+    
+    // inorder morris traversal 
+    while(curr !== null){
+        if(curr.left !== null){
+            let temp = curr.left
+            // looking for the right most node of the left subtree
+            while(temp.right !== null && temp.right !== curr){
+                temp = temp.right
+            }
+            // first visit, connect a bridge
+            if(temp.right === null){
+                temp.right = curr
+                curr = curr.left
+            }else{
+                // visit value
+                temp.right = null
+                findSwapped(curr)
+                curr = curr.right
+            }
+        }else{
+            // visit value
+            findSwapped(curr)
+            curr = curr.right
+        }
+        
+    }
+    swap(rev[0],rev[1])
+};
 
 
