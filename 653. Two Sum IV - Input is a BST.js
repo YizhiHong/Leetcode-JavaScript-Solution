@@ -47,6 +47,8 @@ var findTarget = function(root, k) {
     return flag ? true : false    
 };
 
+
+
 //O(n) O(n) morris
 var findTarget = function(root, k) {
     let curr = root
