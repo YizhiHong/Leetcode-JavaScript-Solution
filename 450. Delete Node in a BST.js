@@ -57,6 +57,7 @@ var deleteNode = function(root, key) {
     }else if(root.val > key){
         root.left = deleteNode(root.left,key)
     }else{
+    	if(root.left === null && root.right === null) return null
         let successor = new TreeNode(null)
         
         if(root.left === null){
@@ -85,6 +86,27 @@ var deleteNode = function(root, key) {
     return root
 };
 
+// method 2: replace value
+var deleteNode = function(root, key) {
+    if (!root) return null;
+    if (root.val > key) root.left = deleteNode(root.left, key)
+    else if (root.val < key) root.right = deleteNode(root.right, key)
+    else {
+        if (!root.left && !root.right) return null;
+        if (!root.right) return root.left;
+        if (!root.left) return root.right;
+        let min = findSuccessor(root.right);
+        root.val = min.val;
+        root.right = deleteNode(root.right, root.val);
+    }
+    return root;
+};
 
+function findSuccessor(root) {
+    while (root.left) {
+        root = root.left;
+    }
+    return root;
+}
 
 
