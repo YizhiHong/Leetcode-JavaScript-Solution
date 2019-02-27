@@ -17,3 +17,61 @@
 // Input words contain only lowercase letters.
 // Follow up:
 // Try to solve it in O(n log k) time and O(n) extra space.
+
+// sort O(nlogn) O(n)
+var topKFrequent = function(words, k) {
+    let hashMap = {}
+    
+    for(let w of words){
+        hashMap[w] = hashMap[w]+1 || 1
+    }
+    
+    let res = Object.keys(hashMap).sort((a,b) => {
+        if (hashMap[a] > hashMap[b]) {
+            return -1;
+        }else if (hashMap[a] < hashMap[b]) {
+            return 1;
+        }else {
+            if (a < b) return -1;
+            if (a > b) return 1;
+            return 0;
+        }
+    })
+
+    return res.slice(0,k)
+};
+
+//bucket O(n) O(n)
+var topKFrequent = function(words, k) {
+    let set = Array.from(new Set([...words])),
+        hashMap = new Map( set.map(w => [w,0])),
+        max = 0
+    
+    for(let w of words){
+        let val = hashMap.get(w) + 1
+        hashMap.set(w,val)
+        if(val > max) max = val
+    }
+    
+    let bucket = new Array(max).fill(null)
+    
+    for( let [key,count] of hashMap.entries()){
+        if(bucket[count]){
+            bucket[count].push(key)
+        }else{
+            bucket[count] = [key]
+        }
+    }
+    
+    let res = []
+    for(let i = bucket.length -1; i>= 0;i--){
+        if (bucket[i]) {
+            if(bucket.length > 1) bucket[i].sort()
+            res.push(...bucket[i])
+        }
+        if(k < res.length){
+            return res.slice(0,k)
+        }else if(k === res.length) return res
+    }
+    return res
+};

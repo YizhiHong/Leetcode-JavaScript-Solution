@@ -38,7 +38,7 @@ Solution 3: Quick Select -  Hoare Partition O(n) worst O(n^2)
     
     // partion like quicksort
     const _partition = (start,end) => {
-        // let pivot = ~~(Math.random() * (end-start+1) + start)
+        // let pivot = Math.floor(Math.random() * (end-start+1) + start)
         let pivot = start
         const _swap = (a,b) =>{
             [nums[a],nums[b]] = [nums[b],nums[a]]
@@ -67,3 +67,29 @@ Solution 3: Quick Select -  Hoare Partition O(n) worst O(n^2)
         }
     }
 };
+// solution 5: binary search O(nlogn)
+var findKthLargest = function(nums, k) {
+    let min = Math.min(...nums),
+        max = Math.max(...nums),
+        kth = nums.length - k + 1
+    
+    while (min < max) {
+        let mid = Math.floor((min + max)/2);
+        
+        if (isKthLargest(mid, kth, nums)) {
+            max = mid;
+        } else {
+            min = mid + 1;
+        }
+    }
+    
+    return min;
+    
+    function isKthLargest(target, k, nums) {
+        nums.forEach(item=> {
+            if(item <= target) k--
+        })
+        return k <= 0;
+    }
+};
+
