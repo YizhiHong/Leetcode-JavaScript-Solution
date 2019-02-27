@@ -20,25 +20,24 @@
 
 // sort O(nlogn) O(n)
 var topKFrequent = function(words, k) {
-    let hashMap = {}
+    let hashMap = new Map()
     
     for(let w of words){
-        hashMap[w] = hashMap[w]+1 || 1
+        let val = hashMap.get(w) + 1 || 1
+        hashMap.set(w,val)
     }
     
-    let res = Object.keys(hashMap).sort((a,b) => {
-        if (hashMap[a] > hashMap[b]) {
+    return [...hashMap.keys()].sort((a,b) => {
+        if (hashMap.get(a) > hashMap.get(b)) {
             return -1;
-        }else if (hashMap[a] < hashMap[b]) {
+        }else if (hashMap.get(a)< hashMap.get(b)) {
             return 1;
         }else {
             if (a < b) return -1;
             if (a > b) return 1;
             return 0;
         }
-    })
-
-    return res.slice(0,k)
+    }).slice(0,k)
 };
 
 //bucket O(n) O(n)
