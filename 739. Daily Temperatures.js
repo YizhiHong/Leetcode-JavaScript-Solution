@@ -9,7 +9,7 @@ Note: The length of temperatures will be in the range [1, 30000]. Each temperatu
 */
 
 //O(n) O(n)
-
+//stack
 var dailyTemperatures = function(T) {
     let stack = []
     let res = new Uint16Array(T.length).fill(0)
@@ -20,6 +20,22 @@ var dailyTemperatures = function(T) {
             res[idx] = i - idx
         }
         stack.push(i)
+    }
+    return res
+};
+
+//array 
+var dailyTemperatures = function(T) {
+    let stack = new Uint16Array(T.length)
+    let res = new Uint16Array(T.length)
+    let top = -1
+    
+    for(let i = 0; i < T.length; i++){
+        while( top >= 0 && T[i] > T[stack[top]]){
+            let idx = stack[top--]
+            res[idx] = i - idx
+        }
+        stack[++top] = i
     }
     return res
 };
