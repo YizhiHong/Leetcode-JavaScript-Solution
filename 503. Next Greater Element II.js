@@ -10,8 +10,9 @@ The second 1's next greater number needs to search circularly, which is also 2.
 Note: The length of given array won't exceed 10000.
  */
 
+// O(n) O(n)
 
- 
+
 var nextGreaterElements = function(nums) {
     Array.prototype.peek = function(){
         return this[this.length-1]
