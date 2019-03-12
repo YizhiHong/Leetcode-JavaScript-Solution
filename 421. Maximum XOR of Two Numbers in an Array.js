@@ -11,6 +11,8 @@
  * @param {number[]} nums
  * @return {number}
  */
+
+ 
 var findMaximumXOR = function(nums) {
     let max = 0,
         mask = 0
