@@ -20,7 +20,6 @@
 // You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
 
 // use two stack
-
 class MyQueue{
     constructor(){
         this.stack1 = []
@@ -53,5 +52,38 @@ class MyQueue{
     //O(1)
     empty(){
         return this.stack1.length === 0 && this.stack2.length === 0
+    }
+};
+
+// use recursive stack
+class MyQueue{
+    constructor(){
+        this.stack = []
+    }
+    
+    push(x){
+        this._push(x)
+    }
+    _push(x){
+        if(this.stack.length === 0){
+            this.stack.push(x)
+            return;
+        }
+        let temp = this.stack.pop()
+        this._push(x)
+        this.stack.push(temp)
+        
+    }
+    
+    pop(){
+        return this.stack.pop()
+    }
+    
+    peek(){
+        return this.stack[this.stack.length - 1]
+    }
+    
+    empty(){
+        return this.stack.length === 0
     }
 };
