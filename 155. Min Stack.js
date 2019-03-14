@@ -1,4 +1,30 @@
-// method 1: current min
+
+// method 1: one stack with min in.
+class MinStack {
+    constructor(){
+        this.stack = []
+        this.mins = Infinity
+    }
+    push(x){
+        if(x <= this.mins){
+            this.stack.push(this.mins)
+            if(x !== this.mins) this.mins = x
+        }
+        this.stack.push(x)
+    }
+    pop(){
+        if(this.stack.pop() === this.mins) this.mins = this.stack.pop()
+    }
+    top(){
+        return this.stack[this.stack.length-1]
+    }
+    getMin(){
+        return this.mins
+    }
+};
+
+
+// method 2: current min
 /**
  * initialize your data structure here.
  */
@@ -67,7 +93,7 @@ var MinStack = function() {
     this.mins = []
 };
 
-// method 2: two stack
+// method 3: two stack
 /** 
  * @param {number} x
  * @return {void}
@@ -103,11 +129,4 @@ MinStack.prototype.getMin = function() {
     return this.mins[this.mins.length - 1]
 };
 
-/** 
- * Your MinStack object will be instantiated and called as such:
- * var obj = Object.create(MinStack).createNew()
- * obj.push(x)
- * obj.pop()
- * var param_3 = obj.top()
- * var param_4 = obj.getMin()
- */
+
