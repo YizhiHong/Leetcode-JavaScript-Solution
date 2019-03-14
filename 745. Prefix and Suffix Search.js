@@ -65,3 +65,38 @@ class WordFilter{
         return curr.weight
     }
 };
+
+// solution 2: staright forward
+//	O(nk)
+//
+
+/**
+ * @param {string[]} words
+ */
+var WordFilter = function(words) {
+    this.words = words
+};
+
+/** 
+ * @param {string} prefix 
+ * @param {string} suffix
+ * @return {number}
+ */
+WordFilter.prototype.f = function(prefix, suffix) {
+    let plen = prefix.length,
+        slen = suffix.length
+    for(let i = this.words.length - 1; i >= 0 ; i--){
+        let word = this.words[i]
+        if(word.substring(0,plen) === prefix &&
+          word.substring(word.length - slen,word.length) === suffix){
+           return i
+         }
+    }
+    return -1
+};
+
+/** 
+ * Your WordFilter object will be instantiated and called as such:
+ * var obj = Object.create(WordFilter).createNew(words)
+ * var param_1 = obj.f(prefix,suffix)
+ */
