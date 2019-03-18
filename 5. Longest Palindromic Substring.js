@@ -30,3 +30,26 @@ var longestPalindrome = function(s) {
 };
 
 // dp O(n^2) O(1)
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function(s) {
+    let res = ""
+    for (let i = 0; i < s.length; i++){
+        _lp(i,i)
+        _lp(i,i+1)
+    }
+    function _lp(left,right){
+        while(left >=0 && right <= s.length && s.charAt(left) === s.charAt(right)){
+            left--
+            right++
+        }
+        let curr = s.substring(left + 1, right)
+        if(curr.length > res.length) res = curr
+        
+    }
+
+    return res
+};
