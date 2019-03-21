@@ -96,3 +96,26 @@ var subsetsWithDup = function(nums) {
 };
 
 
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsetsWithDup = function(nums) {
+    let res = []
+    nums.sort((a,b)=>a-b)
+    backtrack(res, [], 0)
+    function backtrack(results, result, start){
+        results.push([...result])
+        let len = nums.length
+        for(let i = start; i< len; i++){
+            if(i !== start && nums[i] === nums[i-1]) continue
+            result.push(nums[i])
+            backtrack(results,result,i+1)
+            result.pop()
+        }
+    }
+    
+    return res
+};
+
+
