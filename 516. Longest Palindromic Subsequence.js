@@ -16,6 +16,10 @@
     2
     One possible longest palindromic subsequence is "bb".
  */
+
+/**
+O(n^2) O(n^2) solution
+ */  
 var longestPalindromeSubseq = function(s) {
     let len = s.length,
         dp = new Array()
@@ -33,4 +37,28 @@ var longestPalindromeSubseq = function(s) {
     }
     
     return dp[0][len-1]
+};
+
+/**
+O(n) space solution
+ */
+var longestPalindromeSubseq = function(s) {
+    let len = s.length,
+        dp = new Array(len).fill(0)
+        
+    for(let i = len -1; i >= 0; i--){
+        dp[i] = 1
+        let pre = 0
+        for(let j = i + 1; j < len; j++){
+            let tmp = dp[j]
+            if( s.charAt(i) === s.charAt(j)){
+                dp[j] = 2 + pre
+            }else{
+                dp[j] = Math.max(dp[j],dp[j-1])
+            }
+            pre = tmp
+        }
+    }
+    
+    return dp[len-1]
 };
