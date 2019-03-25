@@ -2,6 +2,8 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
+
+ // method 1: swap
 var permute = function(nums) {
     let res = []
     
@@ -29,3 +31,34 @@ var permute = function(nums) {
     
     return res
 };
+
+//method 2
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+    let res = []
+    
+    _permute(nums,[],0)
+    
+    function _permute(numbers, num ,idx){
+        //base case: if reach the end 
+        if( num.length >= numbers.length){
+            num.push(numbers[idx])
+            res.push(num)
+            return
+        }
+        for(let i = 0; i < numbers.length ; i++){
+            if(!num.includes(numbers[i])){
+                let newNum = [...num,numbers[i]]
+                _permute(numbers, newNum, idx+1)    
+                newNum.pop()
+            }
+        }
+        
+    }
+    
+    return res
+};
+
