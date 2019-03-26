@@ -32,7 +32,7 @@ var permute = function(nums) {
     return res
 };
 
-//method 2
+//method 2: backtraking
 /**
  * @param {number[]} nums
  * @return {number[][]}
@@ -61,4 +61,6 @@ var permute = function(nums) {
     
     return res
 };
+
+
 
