@@ -18,3 +18,62 @@
 // Output: 1
 // Explanation:The 0th and 1st students are direct friends, the 1st and 2nd students are direct friends, 
 // so the 0th and 2nd students are indirect friends. All of them are in the same friend circle, so return 1.
+
+
+// Method 1: DfS: O(n*n) O(n)
+var findCircleNum = function(M) {
+    if(M.length === 0) return 0
+    let count = 0,
+        visited = new Array(M.length).fill(false)
+
+    for(let i = 0; i< M.length; i++){
+        if(!visited[i]){
+            find(i)
+            count++
+        }
+    }
+    
+    return count
+    
+    function find(i){
+        visited[i] = true
+        for(let j = 0; j < M.length; j++){
+            if(i !== j && !visited[j] && M[i][j] === 1){
+                find(j)
+              }
+        }
+    }
+};
+
+var findCircleNum = function(M) {
+    
+    if(M.length === 0) return 0
+    let count = 0
+    for(let i = 0; i< M.length; i++){
+        count = count + find(i) 
+    }
+    
+    return count
+    
+    function find(i){
+        if(M[i][i] ===1) {
+            M[i][i] = 0
+            for(let j = 0; j < M.length; j++){
+                if(M[i][j] === 1){
+                    M[i][j] = 0
+                    M[j][i] = 0
+                    find(j)
+                }
+            }
+            return 1
+        }else return 0
+    }
+};
+
+// Method 2: Union find O(n*n) O(n)
+
+
+
+
+
+
