@@ -97,3 +97,33 @@ var updateMatrix = function(matrix) {
 };
 
 // method 2: DP
+
+var updateMatrix = function(matrix) {
+    if(matrix.length === 0) return [[]]
+    let row = matrix.length,
+        col = matrix[0].length,
+        result = new Array(row).fill(0)
+                .map(() => new Array(col).fill(10001))
+        
+    
+    for(let i = 0; i < row ;i++){
+        for(let j = 0; j < col; j++){
+            if(matrix[i][j]){
+                if(i>0) result[i][j] = Math.min(result[i][j],result[i-1][j] + 1)
+                if(j>0) result[i][j] = Math.min(result[i][j],result[i][j-1] + 1)
+            }else{
+                result[i][j] = 0
+            }
+        }
+    }
+    
+    for(let i = row-1; i >=0; i--){
+        for(let j = col-1; j >=0; j--){
+            if(i<row-1) result[i][j] = Math.min(result[i][j],result[i+1][j] + 1)
+            if(j<col-1) result[i][j] = Math.min(result[i][j],result[i][j+1] + 1)
+        }
+    }
+    return result
+    
+};
+
