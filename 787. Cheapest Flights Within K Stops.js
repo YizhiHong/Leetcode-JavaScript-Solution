@@ -44,6 +44,11 @@ There will not be any duplicated flights or self cycles.
 
 /** method 1: bellman ford O(EV) O(V)
     Ref: https://www.youtube.com/watch?v=FtN3BYH2Zes
+    explain: 
+    Why copy the cost? 
+    In normal Bellman ford, we don't need to do that. 
+    But in order to perform k times transfer. 
+    we need to limit the cost can only be updated 1 time per iteration. 
 */
 var findCheapestPrice = function(n, flights, src, dst, K) {
     // bellman ford
