@@ -19,34 +19,48 @@ Explanation: The first 3 pairs are returned from the sequence:
  * @param {number} k
  * @return {number[][]}
  */
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @param {number} k
+ * @return {number[][]}
+ */
+
+ // O(k*k) O(klog(k)) if it's priority quque,  O(k)
 var kSmallestPairs = function(nums1, nums2, k) {
-    if(nums1.length === 0 || nums2.length === 0){
-        return [];
-    }
-    let queue = [];
-    function queuePush(i,j){
-        if(i < nums1.length && j < nums2.length){
-            for(let k = 0; k < queue.length ;k++){
-                if( (nums1[i] + nums2[j]) < queue[k][0]){
-                    queue.splice(k,0,[nums1[i] + nums2[j],i,j])
-                    return
-                }
-            }
-            queue.push([nums1[i] + nums2[j],i,j]);
-        }
-    }
-    queuePush(0, 0);
-    let pairs = [];
-    while (queue.length !== 0 && pairs.length < k){
-        let o = queue.shift();
-        let i = o[1];
-        let j = o[2];
-        pairs.push([nums1[i], nums2[j]]);
+    if(k === 0 || nums1.length === 0 || nums2.length === 0) return []
+    
+    const queue = [],
+        res = []
         
-        queuePush(i, j+1);
+    _queuePush(0,0) // push the index
+    
+    while (queue.length > 0 && res.length < k){
+        let [_,i,j] = _queuePop() // pop from pq
+        res.push([nums1[i], nums2[j]])
+        
+        _queuePush(i,j+1)
+        
         if(j === 0){
-            queuePush(i+1,0);
+            _queuePush(i+1, 0)
         }
     }
-    return pairs;
+    
+    function _queuePush(i,j){
+        if(i < nums1.length && j < nums2.length){
+            let totol = nums1[i] + nums2[j]
+            for(let q = 0; q < queue.length; q++){
+                if( totol < queue[q][0]){
+                    queue.splice(q, 0, [totol, i, j])
+                    return
+                }   
+            }
+            queue.push([totol,i,j])
+        }
+    }
+    function _queuePop(){
+        return queue.shift()
+    }
+    
+    return res
 };
