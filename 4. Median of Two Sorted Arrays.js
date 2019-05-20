@@ -26,6 +26,7 @@ The median is (2 + 3)/2 = 2.5
  */
 
  // O(log(min(m,n))) O(1)
+ // ref: https://www.youtube.com/watch?v=LPFhl65R7ww
 var findMedianSortedArrays = function(nums1, nums2) {
     if(nums1.length > nums2.length) return findMedianSortedArrays(nums2,nums1)
     let xLen = nums1.length,
