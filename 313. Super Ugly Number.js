@@ -16,7 +16,7 @@
   0 < k ≤ 100, 0 < n ≤ 106, 0 < primes[i] < 1000.
   The nth super ugly number is guaranteed to fit in a 32-bit signed integer.
 */
-
+//O(kn) O(n)
 var nthSuperUglyNumber = function(n, primes) {
     let DP = new Array(n).fill(Infinity)
     DP[0] = 1

@@ -22,6 +22,7 @@
 */
  
 //stack: O(n) O(n)
+
 var removeKdigits = function(num, k) {
     Array.prototype.peek = function(){
         return this[this.length-1]
@@ -44,5 +45,6 @@ var removeKdigits = function(num, k) {
     let res = stack.toString().split(",").join("")
     
     return res || "0"
+
 };
 
