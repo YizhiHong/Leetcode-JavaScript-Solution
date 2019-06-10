@@ -46,10 +46,10 @@ var lengthOfLongestSubstring = function(s) {
     
     let hashMap = new Array(256).fill(0)
     
-    for (let i = 0, j = 0; i < len; i++) {
-        j = Math.max(hashMap[s.charCodeAt(i)], j);
-        res = Math.max(res, i - j + 1);
-        hashMap[s.charCodeAt(i)] = i + 1;
+    for (let end = 0, start = 0; end < len; start++) {
+        start = Math.max(hashMap[s.charCodeAt(end)], start);
+        res = Math.max(res, end - start + 1);
+        hashMap[s.charCodeAt(end)] = end + 1;
     }
     return res;
     
