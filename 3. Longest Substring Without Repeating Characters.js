@@ -35,3 +35,22 @@ var lengthOfLongestSubstring = function(s) {
     }
     return max;
 }
+
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+    let len = s.length, res = 0;
+    
+    let hashMap = new Array(256).fill(0)
+    
+    for (let i = 0, j = 0; i < len; i++) {
+        j = Math.max(hashMap[s.charCodeAt(i)], j);
+        res = Math.max(res, i - j + 1);
+        hashMap[s.charCodeAt(i)] = i + 1;
+    }
+    return res;
+    
+};
