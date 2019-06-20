@@ -27,7 +27,7 @@ Output: false
  * @param {string[]} wordDict
  * @return {boolean}
  */
-// DP O(n) O(1)
+// DP O(n^2) O(n)
 var wordBreak = function (s, wordDict) {
   let wordMap = new Set([...wordDict])
   let dp = new Array(s.length + 1).fill(false)
@@ -44,3 +44,31 @@ var wordBreak = function (s, wordDict) {
   console.log(dp)
   return dp[s.length]
 };
+
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+// bfs O(n^2) O(n)
+var wordBreak = function(s, wordDict) {
+  let wordSet = new Set([...wordDict])
+  let visited = new Set()
+  let queue = []
+
+  queue.unshift(0)// push start index
+  while(queue.length > 0){ 
+      let start = queue.pop()
+      if(visited.has(start)) continue
+      for(let i = start +1; i <= s.length;i++){
+          if(wordSet.has(s.substring(start, i))){
+              queue.unshift(i)
+              if(i === s.length) return true
+          }
+      }
+      visited.add(start)
+      
+  }
+  return false
+};
+  
