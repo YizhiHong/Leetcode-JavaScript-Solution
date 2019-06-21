@@ -51,12 +51,12 @@ var mergeTrees = function (t1, t2) {
   if (t1 === null) return t2;
   if (t2 === null) return t1;
 
-  let stack = [];
+  let queue = [];
 
-  stack.push([t1, t2]);
+  queue.push([t1, t2]);
 
-  while (stack.length > 0) {
-    let [r1, r2] = stack.pop();
+  while (queue.length > 0) {
+    let [r1, r2] = queue.pop();
 
     if (r1 === null || r2 === null) continue;
 
@@ -65,13 +65,13 @@ var mergeTrees = function (t1, t2) {
     if (r1.left === null) {
       r1.left = r2.left;
     } else {
-      stack.push([r1.left, r2.left]);
+      queue.push([r1.left, r2.left]);
     }
 
     if (r1.right === null) {
       r1.right = r2.right;
     } else {
-      stack.push([r1.right, r2.right]);
+      queue.push([r1.right, r2.right]);
     }
   }
   return t1;
