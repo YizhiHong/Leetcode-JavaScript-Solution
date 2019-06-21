@@ -13,6 +13,6 @@ Input: J = "z", S = "ZZ"
 Output: 0
 */
 var numJewelsInStones = function(J, S) {
-    const jewels = new Set([...J])
-    return [...S].filter(s => jewels.has(s)).length
+  const jewels = new Set([...J]);
+  return [...S].filter(s => jewels.has(s)).length;
 };

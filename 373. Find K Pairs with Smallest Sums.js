@@ -26,41 +26,41 @@ Explanation: The first 3 pairs are returned from the sequence:
  * @return {number[][]}
  */
 
- // O(k*k) O(klog(k)) if it's priority quque,  O(k)
+// O(k*k) O(klog(k)) if it's priority quque,  O(k)
 var kSmallestPairs = function(nums1, nums2, k) {
-    if(k === 0 || nums1.length === 0 || nums2.length === 0) return []
-    
-    const queue = [],
-        res = []
-        
-    _queuePush(0,0) // push the index
-    
-    while (queue.length > 0 && res.length < k){
-        let [_,i,j] = _queuePop() // pop from pq
-        res.push([nums1[i], nums2[j]])
-        
-        _queuePush(i,j+1)
-        
-        if(j === 0){
-            _queuePush(i+1, 0)
+  if (k === 0 || nums1.length === 0 || nums2.length === 0) return [];
+
+  const queue = [],
+    res = [];
+
+  _queuePush(0, 0); // push the index
+
+  while (queue.length > 0 && res.length < k) {
+    let [_, i, j] = _queuePop(); // pop from pq
+    res.push([nums1[i], nums2[j]]);
+
+    _queuePush(i, j + 1);
+
+    if (j === 0) {
+      _queuePush(i + 1, 0);
+    }
+  }
+
+  function _queuePush(i, j) {
+    if (i < nums1.length && j < nums2.length) {
+      let totol = nums1[i] + nums2[j];
+      for (let q = 0; q < queue.length; q++) {
+        if (totol < queue[q][0]) {
+          queue.splice(q, 0, [totol, i, j]);
+          return;
         }
+      }
+      queue.push([totol, i, j]);
     }
-    
-    function _queuePush(i,j){
-        if(i < nums1.length && j < nums2.length){
-            let totol = nums1[i] + nums2[j]
-            for(let q = 0; q < queue.length; q++){
-                if( totol < queue[q][0]){
-                    queue.splice(q, 0, [totol, i, j])
-                    return
-                }   
-            }
-            queue.push([totol,i,j])
-        }
-    }
-    function _queuePop(){
-        return queue.shift()
-    }
-    
-    return res
+  }
+  function _queuePop() {
+    return queue.shift();
+  }
+
+  return res;
 };

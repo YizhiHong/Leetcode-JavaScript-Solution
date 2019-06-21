@@ -15,16 +15,16 @@ Note: The input number n will not exceed 100,000,000. (1e8)
 
 // O(sqrt(n)) O(1)
 var checkPerfectNumber = function(num) {
-    if (num <= 1) {
-        return false;
+  if (num <= 1) {
+    return false;
+  }
+
+  let sum = 1;
+
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      sum += i + num / i;
     }
-    
-    let sum = 1;
-    
-    for( let i = 2; i <= Math.sqrt(num); i++){
-        if (num % i === 0){
-            sum += i + num / i;
-        }
-    }
-    return sum === num
+  }
+  return sum === num;
 };

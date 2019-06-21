@@ -23,84 +23,85 @@ cache.get(3);       // returns 3
 cache.get(4);       // returns 4
 */
 
-
 /**
  * @param {number} capacity
  */
 class LFUCache {
-    constructor(capacity){
-        this.capacity = capacity
-        this.set = {} // key -> node
-        this.lists = {} // count -> listNode
-        this.min = 1
+  constructor(capacity) {
+    this.capacity = capacity;
+    this.set = {}; // key -> node
+    this.lists = {}; // count -> listNode
+    this.min = 1;
+  }
+  get(key) {
+    if (!this.set.hasOwnProperty(key)) return -1;
+    // update the counter
+    this.update(this.set[key]);
+
+    return this.set[key].val;
+  }
+
+  update(node) {
+    // 1.update counter
+    let prev_count = node.count;
+    node.count++;
+    let curr_count = node.count;
+
+    // 2.delete entry node in counter lists
+    this.lists[prev_count].delete(node.listNode.value);
+
+    if (
+      this.lists[prev_count].head === null &&
+      this.lists[prev_count].tail === null &&
+      prev_count === this.min
+    ) {
+      // delete the min counter
+      delete this.lists[prev_count];
+      this.min = this.min + 1;
     }
-    get(key){
-        if(!this.set.hasOwnProperty(key)) return -1
-        // update the counter
-        this.update(this.set[key]) 
-    
-        return this.set[key].val
+
+    // 3.append the node on the front
+    if (!this.lists.hasOwnProperty(curr_count)) {
+      this.lists[curr_count] = new DoublyLinkedList();
     }
-    
-    update(node){
-        // 1.update counter
-        let prev_count = node.count
-        node.count++
-        let curr_count = node.count
+    this.lists[curr_count].prepend(node.key);
 
-        // 2.delete entry node in counter lists
-        this.lists[prev_count].delete(node.listNode.value)
+    // 4.update new pointer
+    node.listNode = this.lists[curr_count].head;
+  }
 
-        if(this.lists[prev_count].head === null && this.lists[prev_count].tail === null && prev_count === this.min){
-            // delete the min counter 
-            delete this.lists[prev_count]
-            this.min = this.min + 1
-        }
+  put(key, value) {
+    if (this.capacity <= 0) return;
 
-        // 3.append the node on the front
-        if(!this.lists.hasOwnProperty(curr_count)){
-            this.lists[curr_count] = new DoublyLinkedList()
-        }
-        this.lists[curr_count].prepend(node.key)
+    //if key already exist
+    if (this.set.hasOwnProperty(key)) {
+      this.set[key].val = value;
+      this.update(this.set[key]);
+    } else {
+      // if size reach the capacity
+      if (Object.keys(this.set).length === this.capacity) {
+        //delete the last Listnode
+        let evict = this.lists[this.min].tail.value;
 
-        // 4.update new pointer
-        node.listNode = this.lists[curr_count].head
+        this.lists[this.min].deleteTail();
+
+        //delete
+        delete this.set[evict];
+      }
+
+      this.min = 1;
+
+      if (!this.lists.hasOwnProperty(this.min)) {
+        this.lists[this.min] = new DoublyLinkedList();
+      }
+
+      this.lists[this.min].prepend(key);
+
+      this.set[key] = new node(key, value, this.min, this.lists[this.min].head);
     }
-    
-    put(key,value){
-        if(this.capacity <= 0) return;
-    
-        //if key already exist
-        if(this.set.hasOwnProperty(key)){
-            this.set[key].val = value
-            this.update(this.set[key])
-        }else{
-              // if size reach the capacity
-            if(Object.keys(this.set).length === this.capacity ){
-                //delete the last Listnode 
-                let evict = this.lists[this.min].tail.value
-
-                this.lists[this.min].deleteTail()
-
-                //delete 
-                delete this.set[evict]
-            }
-
-            this.min = 1
-
-            if(!this.lists.hasOwnProperty(this.min)){
-                this.lists[this.min] = new DoublyLinkedList()
-            }
-
-            this.lists[this.min].prepend(key)
-
-            this.set[key] = new node(key,value,this.min, this.lists[this.min].head)
-        }
-    
-    }
-    
+  }
 }
-/** 
+/**
  * Node object
  * @param {number} key
  * @param {number} value
@@ -108,15 +109,15 @@ class LFUCache {
  * @param {listNode} point to double linked-list
  */
 class node {
-    constructor(key, value, count, listNode){
-        this.key = key;
-        this.val = value;
-        this.count = count;
-        this.listNode = listNode;
-    }
+  constructor(key, value, count, listNode) {
+    this.key = key;
+    this.val = value;
+    this.count = count;
+    this.listNode = listNode;
+  }
 }
 
-/** 
+/**
  * Your LFUCache object will be instantiated and called as such:
  * var obj = Object.create(LFUCache).createNew(capacity)
  * var param_1 = obj.get(key)
@@ -349,4 +350,4 @@ class DoublyLinkedList {
 
     return deletedHead;
   }
-} 
+}

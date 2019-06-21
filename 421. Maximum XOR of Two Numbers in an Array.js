@@ -12,13 +12,12 @@
  * @return {number}
  */
 
- 
 var findMaximumXOR = function(nums) {
-    let max = 0,
-        mask = 0
-    
-    for(let i = 31 ; i>=0; i--){
-         /*
+  let max = 0,
+    mask = 0;
+
+  for (let i = 31; i >= 0; i--) {
+    /*
             we need a mask so we don't lose any of the previous bits
             mask example:
                 10000000000000000000000000000000
@@ -27,23 +26,22 @@ var findMaximumXOR = function(nums) {
                 11110000000000000000000000000000
                 ....
         */
-        mask = mask | (1 << i)
-        
-        let set = new Set();
-        for(let num of nums){
-            set.add(num & mask)
-        }
-        
-        let tmp = max | (1 << i)
-        for(let prefix of set.values()){
-            if(set.has(tmp ^ prefix)) {
-                max = tmp
-                break
-            }
-        }
+    mask = mask | (1 << i);
+
+    let set = new Set();
+    for (let num of nums) {
+      set.add(num & mask);
     }
-    return max
+
+    let tmp = max | (1 << i);
+    for (let prefix of set.values()) {
+      if (set.has(tmp ^ prefix)) {
+        max = tmp;
+        break;
+      }
+    }
+  }
+  return max;
 };
 
 // solution 2: prefix tree: O(n) O(n)
-

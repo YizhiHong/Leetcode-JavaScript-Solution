@@ -9,7 +9,7 @@
 // MyQueue queue = new MyQueue();
 
 // queue.push(1);
-// queue.push(2);  
+// queue.push(2);
 // queue.peek();  // returns 1
 // queue.pop();   // returns 1
 // queue.empty(); // returns false
@@ -20,70 +20,69 @@
 // You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
 
 // use two stack
-class MyQueue{
-    constructor(){
-        this.stack1 = []
-        this.stack2 = []
-        this.front = null
-    }
-    
-    //O(1) O(n)
-    push(x){
-        if(this.stack1.length === 0) this.front = x
-        this.stack1.push(x)
-    }
+class MyQueue {
+  constructor() {
+    this.stack1 = [];
+    this.stack2 = [];
+    this.front = null;
+  }
 
-    //O(1) worst O(n)
-    pop(){
-        if(this.stack2.length === 0){
-            while (this.stack1.length > 0){
-                this.stack2.push(this.stack1.pop())
-            }
-        }
-        return this.stack2.pop()
-    }
+  //O(1) O(n)
+  push(x) {
+    if (this.stack1.length === 0) this.front = x;
+    this.stack1.push(x);
+  }
 
-    //O(1)
-    peek(){
-        if(this.stack2.length > 0) return this.stack2[this.stack2.length-1]
-        return this.front
+  //O(1) worst O(n)
+  pop() {
+    if (this.stack2.length === 0) {
+      while (this.stack1.length > 0) {
+        this.stack2.push(this.stack1.pop());
+      }
     }
-    
-    //O(1)
-    empty(){
-        return this.stack1.length === 0 && this.stack2.length === 0
-    }
-};
+    return this.stack2.pop();
+  }
+
+  //O(1)
+  peek() {
+    if (this.stack2.length > 0) return this.stack2[this.stack2.length - 1];
+    return this.front;
+  }
+
+  //O(1)
+  empty() {
+    return this.stack1.length === 0 && this.stack2.length === 0;
+  }
+}
 
 // use recursive stack
-class MyQueue{
-    constructor(){
-        this.stack = []
+class MyQueue {
+  constructor() {
+    this.stack = [];
+  }
+
+  push(x) {
+    this._push(x);
+  }
+  _push(x) {
+    if (this.stack.length === 0) {
+      this.stack.push(x);
+      return;
     }
-    
-    push(x){
-        this._push(x)
-    }
-    _push(x){
-        if(this.stack.length === 0){
-            this.stack.push(x)
-            return;
-        }
-        let temp = this.stack.pop()
-        this._push(x)
-        this.stack.push(temp)
-        
-    }
-    
-    pop(){
-        return this.stack.pop()
-    }
-    
-    peek(){
-        return this.stack[this.stack.length - 1]
-    }
-    
-    empty(){
-        return this.stack.length === 0
-    }
-};
+    let temp = this.stack.pop();
+    this._push(x);
+    this.stack.push(temp);
+  }
+
+  pop() {
+    return this.stack.pop();
+  }
+
+  peek() {
+    return this.stack[this.stack.length - 1];
+  }
+
+  empty() {
+    return this.stack.length === 0;
+  }
+}

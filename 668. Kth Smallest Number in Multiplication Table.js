@@ -31,25 +31,24 @@ The 6-th smallest number is 6 (1, 2, 2, 3, 4, 6).
  * @return {number}
  */
 var findKthNumber = function(m, n, k) {
-    
-    let lo = 0,
-        hi = m*n
-    
-    while (lo < hi){
-        let mid = ~~((lo+hi)/2)
-        if(checkK(mid)){
-            hi = mid
-        }else{
-            lo = mid + 1
-        }
+  let lo = 0,
+    hi = m * n;
+
+  while (lo < hi) {
+    let mid = ~~((lo + hi) / 2);
+    if (checkK(mid)) {
+      hi = mid;
+    } else {
+      lo = mid + 1;
     }
-    return lo
-    
-    function checkK(x){
-        let count = 0;
-        for (let i = 1; i <= m; i++) {
-            count += Math.min(~~(x/i), n);
-        }
-        return count >= k;
+  }
+  return lo;
+
+  function checkK(x) {
+    let count = 0;
+    for (let i = 1; i <= m; i++) {
+      count += Math.min(~~(x / i), n);
     }
+    return count >= k;
+  }
 };

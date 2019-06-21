@@ -11,40 +11,39 @@
  */
 
 var postorderTraversal = function(root) {
-    const res = []
-    
-    const pot = (curr,res) => {
-        if(curr === null) return;
-        pot(curr.left,res)
-        pot(curr.right,res)
-        res.push(curr.val)
-    }
-    pot(root,res)
-    
-    return res
+  const res = [];
+
+  const pot = (curr, res) => {
+    if (curr === null) return;
+    pot(curr.left, res);
+    pot(curr.right, res);
+    res.push(curr.val);
+  };
+  pot(root, res);
+
+  return res;
 };
 
 //O(n), O(n)
 var postorderTraversal = function(root) {
-    if (root === null) return []
-    let res = [],
-        stack = [],
-        curr;
-    
-    stack.push(root)
-    
-    while(stack.length > 0){
-        curr = stack.pop()
-        if(curr.left !== null){
-            stack.push(curr.left)
-        }
-        
-        if(curr.right !== null){
-            stack.push(curr.right)
-        }
-        res.unshift(curr.val)
-        
+  if (root === null) return [];
+  let res = [],
+    stack = [],
+    curr;
+
+  stack.push(root);
+
+  while (stack.length > 0) {
+    curr = stack.pop();
+    if (curr.left !== null) {
+      stack.push(curr.left);
     }
-    
-    return res
+
+    if (curr.right !== null) {
+      stack.push(curr.right);
+    }
+    res.unshift(curr.val);
+  }
+
+  return res;
 };

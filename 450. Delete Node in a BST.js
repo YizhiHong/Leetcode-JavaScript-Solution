@@ -51,62 +51,59 @@
  ref: https://www.youtube.com/watch?v=00r9qf7lgAk
  */
 var deleteNode = function(root, key) {
-    if (!root) return null
-    if(root.val < key){
-        root.right = deleteNode(root.right,key)
-    }else if(root.val > key){
-        root.left = deleteNode(root.left,key)
-    }else{
-    	if(root.left === null && root.right === null) return null
-        let successor = new TreeNode(null)
-        
-        if(root.left === null){
-            successor = root.right
-        }else if(root.right === null){
-            successor = root.left
-        }else{
-            let successorParent = root
-            successor = root.right
-            while(successor.left !== null){
-                successorParent = successor
-                successor = successor.left
-            }
-            
-            successor.left = root.left
-            if(successorParent !== root){
-                successorParent.left = successor.right
-                successor.right = root.right
-            }
-        
-        }
-        delete root
-        return successor
+  if (!root) return null;
+  if (root.val < key) {
+    root.right = deleteNode(root.right, key);
+  } else if (root.val > key) {
+    root.left = deleteNode(root.left, key);
+  } else {
+    if (root.left === null && root.right === null) return null;
+    let successor = new TreeNode(null);
+
+    if (root.left === null) {
+      successor = root.right;
+    } else if (root.right === null) {
+      successor = root.left;
+    } else {
+      let successorParent = root;
+      successor = root.right;
+      while (successor.left !== null) {
+        successorParent = successor;
+        successor = successor.left;
+      }
+
+      successor.left = root.left;
+      if (successorParent !== root) {
+        successorParent.left = successor.right;
+        successor.right = root.right;
+      }
     }
-    
-    return root
+    delete root;
+    return successor;
+  }
+
+  return root;
 };
 
 // method 2: replace value
 var deleteNode = function(root, key) {
-    if (!root) return null;
-    if (root.val > key) root.left = deleteNode(root.left, key)
-    else if (root.val < key) root.right = deleteNode(root.right, key)
-    else {
-        if (!root.left && !root.right) return null;
-        if (!root.right) return root.left;
-        if (!root.left) return root.right;
-        let min = findSuccessor(root.right);
-        root.val = min.val;
-        root.right = deleteNode(root.right, root.val);
-    }
-    return root;
+  if (!root) return null;
+  if (root.val > key) root.left = deleteNode(root.left, key);
+  else if (root.val < key) root.right = deleteNode(root.right, key);
+  else {
+    if (!root.left && !root.right) return null;
+    if (!root.right) return root.left;
+    if (!root.left) return root.right;
+    let min = findSuccessor(root.right);
+    root.val = min.val;
+    root.right = deleteNode(root.right, root.val);
+  }
+  return root;
 };
 
 function findSuccessor(root) {
-    while (root.left) {
-        root = root.left;
-    }
-    return root;
+  while (root.left) {
+    root = root.left;
+  }
+  return root;
 }
-
-

@@ -20,40 +20,41 @@ One longest palindrome that can be built is "dccaccd", whose length is 7.
 
 // Solution 2, O(n) O(n)
 var longestPalindrome = function(s) {
-    let dict = new Map(),
-        res = 0
-    
-    for(let str of s.split('')){
-        if (dict.get(str) > 0){
-            dict.set(str,dict.get(str)-1)
-            res = res + 2
-        }else{
-            dict.set(str,1)
-        }
+  let dict = new Map(),
+    res = 0;
+
+  for (let str of s.split("")) {
+    if (dict.get(str) > 0) {
+      dict.set(str, dict.get(str) - 1);
+      res = res + 2;
+    } else {
+      dict.set(str, 1);
     }
-    for(let value of dict.values()){
-        if(value > 0){
-            return res +1
-        }
+  }
+  for (let value of dict.values()) {
+    if (value > 0) {
+      return res + 1;
     }
-    return res
+  }
+  return res;
 };
 
 // Solution 2, O(n) O(n)
 var longestPalindrome = function(s) {
-    let dict =  {},
-        res = 0,flag = 0
-    
-    for(let str of s){
-        if (dict[str]>0){
-            dict[str] = 0
-            res = res + 2
-            flag--
-        }else{
-            dict[str] = 1
-            flag++
-        }
-    }
+  let dict = {},
+    res = 0,
+    flag = 0;
 
-    return res + Math.min(1,flag)
+  for (let str of s) {
+    if (dict[str] > 0) {
+      dict[str] = 0;
+      res = res + 2;
+      flag--;
+    } else {
+      dict[str] = 1;
+      flag++;
+    }
+  }
+
+  return res + Math.min(1, flag);
 };

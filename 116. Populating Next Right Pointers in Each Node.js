@@ -29,53 +29,52 @@ After calling your function, the tree should look like:
  * @return {void} Do not return anything, modify tree in-place instead.
  */
 var connect = function(root) {
-    if (root === null) return;
-    
-    let queue = [],
-        curr = root
-    
-    queue.push(curr)
-    
-    while (queue.length > 0) {
-        let len = queue.length
-        let nextNode = null
-        while (len > 0){
-            curr = queue[0]
-            len > 1 ? nextNode = queue[1] : nextNode = null
-            if(curr.left !== null){
-                queue.push(curr.left)
-            }
-            if(curr.right !== null){
-                queue.push(curr.right)
-            }
-            curr.next = nextNode
-            queue.shift()
+  if (root === null) return;
 
-            len--
-        }
+  let queue = [],
+    curr = root;
+
+  queue.push(curr);
+
+  while (queue.length > 0) {
+    let len = queue.length;
+    let nextNode = null;
+    while (len > 0) {
+      curr = queue[0];
+      len > 1 ? (nextNode = queue[1]) : (nextNode = null);
+      if (curr.left !== null) {
+        queue.push(curr.left);
+      }
+      if (curr.right !== null) {
+        queue.push(curr.right);
+      }
+      curr.next = nextNode;
+      queue.shift();
+
+      len--;
     }
+  }
 };
 
-
 function TreeLinkNode(val) {
-    this.val = val;
-    this.left = this.right = this.next = null;
+  this.val = val;
+  this.left = this.right = this.next = null;
 }
 
 /**best **/
 var connect = function(root) {
-    if (root === null) return;
-    let previous = root;
-    let current;
-    while (previous.left !== null) {
-        current = previous;
-        while (current !== null) {
-            current.left.next = current.right;
-            if (current.next !== null) {
-                current.right.next = current.next.left;
-            }
-            current = current.next;
-        }
-        previous = previous.left;
+  if (root === null) return;
+  let previous = root;
+  let current;
+  while (previous.left !== null) {
+    current = previous;
+    while (current !== null) {
+      current.left.next = current.right;
+      if (current.next !== null) {
+        current.right.next = current.next.left;
+      }
+      current = current.next;
     }
+    previous = previous.left;
+  }
 };

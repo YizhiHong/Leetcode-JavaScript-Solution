@@ -16,20 +16,20 @@
 
 // Time:O(n) Space:O(1) solution : Narrow down the range gradually
 var twoSum = function(numbers, target) {
-    
-    let [low, high] = [ 0, numbers.length -1], total;
-    
-    while (low < high){
-        total = numbers[low] + numbers[high]
-        if(total > target){
-            high--
-        }else if(total< target){
-            low++
-        }else{
-            return [low+1,high+1]
-        }
+  let [low, high] = [0, numbers.length - 1],
+    total;
+
+  while (low < high) {
+    total = numbers[low] + numbers[high];
+    if (total > target) {
+      high--;
+    } else if (total < target) {
+      low++;
+    } else {
+      return [low + 1, high + 1];
     }
-    return []
+  }
+  return [];
 };
 
 // Time:O(n) Space:O(1) solution

@@ -8,7 +8,7 @@
 // WordFilter(["apple"])
 // WordFilter.f("a", "e") // returns 0
 // WordFilter.f("b", "") // returns -1
- 
+
 // Note:
 
 // words has length in range [1, 15000].
@@ -23,48 +23,47 @@
  * @param {string[]} words
  */
 
-class Trie{
-    constructor(){
-        this.table = new Map()
-        this.weight = 0
+class Trie {
+  constructor() {
+    this.table = new Map();
+    this.weight = 0;
+  }
+  insert(word, index) {
+    let curr = this;
+    for (let w of word) {
+      if (!curr.table.has(w)) curr.table.set(w, new Trie());
+      curr = curr.table.get(w);
+      curr.weight = index;
     }
-    insert(word,index){
-        let curr = this
-        for(let w of word){
-            if(!curr.table.has(w)) curr.table.set(w,new Trie())
-            curr = curr.table.get(w)
-            curr.weight = index
-        }
-        
-    }
+  }
 }
-class WordFilter{
-    constructor(words){
-        this.trie = new Trie()
-        this.init(words)
+class WordFilter {
+  constructor(words) {
+    this.trie = new Trie();
+    this.init(words);
+  }
+
+  init(words) {
+    for (let i = 0; i < words.length; i++) {
+      let word = "#" + words[i];
+      for (let j = 0; j < word.length; j++) {
+        this.trie.insert(word.substring(j + 1) + word, i);
+      }
     }
-    
-    init(words){
-        for(let i = 0; i< words.length; i++){
-            let word = "#" + words[i]
-            for(let j = 0; j< word.length; j++){
-                this.trie.insert(word.substring(j+1) + word,i)
-            }
-        }
+  }
+
+  f(prefix, suffix) {
+    let curr = this.trie,
+      word = suffix + "#" + prefix;
+    for (let c of word) {
+      if (!curr.table.has(c)) {
+        return -1;
+      }
+      curr = curr.table.get(c);
     }
-    
-    f(prefix, suffix){
-        let curr = this.trie,
-            word = suffix + "#" + prefix
-        for(let c of word){
-            if(!curr.table.has(c)){
-                return -1
-            }
-            curr = curr.table.get(c)
-        }
-        return curr.weight
-    }
-};
+    return curr.weight;
+  }
+}
 
 // solution 2: staright forward
 //	O(nk)
@@ -74,28 +73,30 @@ class WordFilter{
  * @param {string[]} words
  */
 var WordFilter = function(words) {
-    this.words = words
+  this.words = words;
 };
 
-/** 
- * @param {string} prefix 
+/**
+ * @param {string} prefix
  * @param {string} suffix
  * @return {number}
  */
 WordFilter.prototype.f = function(prefix, suffix) {
-    let plen = prefix.length,
-        slen = suffix.length
-    for(let i = this.words.length - 1; i >= 0 ; i--){
-        let word = this.words[i]
-        if(word.substring(0,plen) === prefix &&
-          word.substring(word.length - slen,word.length) === suffix){
-           return i
-         }
+  let plen = prefix.length,
+    slen = suffix.length;
+  for (let i = this.words.length - 1; i >= 0; i--) {
+    let word = this.words[i];
+    if (
+      word.substring(0, plen) === prefix &&
+      word.substring(word.length - slen, word.length) === suffix
+    ) {
+      return i;
     }
-    return -1
+  }
+  return -1;
 };
 
-/** 
+/**
  * Your WordFilter object will be instantiated and called as such:
  * var obj = Object.create(WordFilter).createNew(words)
  * var param_1 = obj.f(prefix,suffix)

@@ -15,26 +15,25 @@
 //   []
 // ]
 
-
 /**
  sort and skip, O(nlogn + n^2)
  */
 var subsetsWithDup = function(nums) {
-    let res = [[]],
-        start
-    
-    nums.sort((a,b)=>a-b)
-    
-    for(let i = 0; i< nums.length; i++){
-        if(i === 0 || nums[i] !== nums[i-1]) start = 0
-        
-        for(let j = res.length - 1; j >= start; start++ ){
-            res.push([...res[start]])
-            res[res.length-1].push(nums[i])
-        }
-    }
+  let res = [[]],
+    start;
 
-    return res
+  nums.sort((a, b) => a - b);
+
+  for (let i = 0; i < nums.length; i++) {
+    if (i === 0 || nums[i] !== nums[i - 1]) start = 0;
+
+    for (let j = res.length - 1; j >= start; start++) {
+      res.push([...res[start]]);
+      res[res.length - 1].push(nums[i]);
+    }
+  }
+
+  return res;
 };
 
 /**
@@ -78,44 +77,40 @@ backtracking:
  * @return {number[][]}
  */
 var subsetsWithDup = function(nums) {
-    let res = []
-    nums.sort((a,b)=>a-b)
-    backtrack(res, [], 0)
-    function backtrack(results, result, start){
-        results.push([...result])
-        for(let i = start; i< nums.length; i++){
-            
-            result.push(nums[i])
-            backtrack(results,result,i+1)
-            result.pop()
-            while(i < nums.length && nums[i+1] === nums[i]) i++
-        }
+  let res = [];
+  nums.sort((a, b) => a - b);
+  backtrack(res, [], 0);
+  function backtrack(results, result, start) {
+    results.push([...result]);
+    for (let i = start; i < nums.length; i++) {
+      result.push(nums[i]);
+      backtrack(results, result, i + 1);
+      result.pop();
+      while (i < nums.length && nums[i + 1] === nums[i]) i++;
     }
-    
-    return res
-};
+  }
 
+  return res;
+};
 
 /**
  * @param {number[]} nums
  * @return {number[][]}
  */
 var subsetsWithDup = function(nums) {
-    let res = []
-    nums.sort((a,b)=>a-b)
-    backtrack(res, [], 0)
-    function backtrack(results, result, start){
-        results.push([...result])
-        let len = nums.length
-        for(let i = start; i< len; i++){
-            if(i !== start && nums[i] === nums[i-1]) continue
-            result.push(nums[i])
-            backtrack(results,result,i+1)
-            result.pop()
-        }
+  let res = [];
+  nums.sort((a, b) => a - b);
+  backtrack(res, [], 0);
+  function backtrack(results, result, start) {
+    results.push([...result]);
+    let len = nums.length;
+    for (let i = start; i < len; i++) {
+      if (i !== start && nums[i] === nums[i - 1]) continue;
+      result.push(nums[i]);
+      backtrack(results, result, i + 1);
+      result.pop();
     }
-    
-    return res
+  }
+
+  return res;
 };
-
-

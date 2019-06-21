@@ -21,25 +21,25 @@ Output:
  * @return {number[][]}
  */
 var combine = function(n, k) {
-    let arr = new Array(n)
-    for(let i = 0; i< arr.length; i++){
-        arr[i] = i + 1
+  let arr = new Array(n);
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = i + 1;
+  }
+  let res = [];
+
+  dfs([], k, 1, n - k + 1);
+
+  function dfs(comb, rest, start, end) {
+    if (rest === 0) {
+      res.push([...comb]);
+    } else {
+      for (let i = start; i <= end; i++) {
+        comb.push(i);
+        dfs(comb, rest - 1, i + 1, end + 1);
+        comb.pop();
+      }
     }
-    let res = []
-    
-    dfs([], k, 1, n-k+1)
-    
-    function dfs(comb, rest, start, end){
-        if(rest === 0){
-            res.push([...comb])
-        }else{
-            for(let i = start; i<= end; i++){
-                comb.push(i)
-                dfs(comb, rest - 1, i+1 ,end + 1)
-                comb.pop()
-            }
-        }
-    }
-    
-    return res
+  }
+
+  return res;
 };

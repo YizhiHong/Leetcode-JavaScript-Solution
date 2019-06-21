@@ -14,7 +14,8 @@
 # addNum: O(logn),
 # findMedian: O(1)
 #
-from heapq import * 
+from heapq import *
+
 
 class MedianFinder:
 
@@ -22,8 +23,8 @@ class MedianFinder:
         """
         initialize your data structure here.
         """
-        self.lo = [] # min-heap
-        self.hi = [] # max-heap
+        self.lo = []  # min-heap
+        self.hi = []  # max-heap
 
     def addNum(self, num):
         """
@@ -31,11 +32,10 @@ class MedianFinder:
         :rtype: void
         """
         heappush(self.lo, num)
-        heappush(self.hi, -heappop(self.lo)) # max-heap use nagative way
+        heappush(self.hi, -heappop(self.lo))  # max-heap use nagative way
         if len(self.lo) < len(self.hi):
-            heappush(self.lo, -heappop(self.hi)) # max-heap use nagative way
-            
-            
+            heappush(self.lo, -heappop(self.hi))  # max-heap use nagative way
+
     def findMedian(self):
         """
         :rtype: float
@@ -43,8 +43,8 @@ class MedianFinder:
         if len(self.lo) > len(self.hi):
             return self.lo[0]
         else:
-            return (self.lo[0] -(self.hi[0]))/2
-        
+            return (self.lo[0] - (self.hi[0]))/2
+
 
 # */
 # solution 2: Balanced BST

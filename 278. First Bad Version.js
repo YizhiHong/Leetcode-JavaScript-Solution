@@ -18,18 +18,19 @@ Then 4 is the first bad version.
 */
 
 var solution = function(isBadVersion) {
-    /**
-     * @param {integer} n Total versions
-     * @return {integer} The first bad version
-     */
-    return function(n) {
-        let start = 1;
-        let end = n - 1;
-        let mid
-        while(start <= end){
-            mid = ~~((end + start)/2);
-            if(!isBadVersion(mid))  start = mid + 1; else end = mid - 1;
-        }
-       return start;
-    };
+  /**
+   * @param {integer} n Total versions
+   * @return {integer} The first bad version
+   */
+  return function(n) {
+    let start = 1;
+    let end = n - 1;
+    let mid;
+    while (start <= end) {
+      mid = ~~((end + start) / 2);
+      if (!isBadVersion(mid)) start = mid + 1;
+      else end = mid - 1;
+    }
+    return start;
+  };
 };

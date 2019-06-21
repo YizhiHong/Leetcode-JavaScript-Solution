@@ -20,17 +20,17 @@
 // O(n) O(n)
 // ref: https://leetcode.com/problems/ugly-number-ii/discuss/69362/O(n)-Java-solution
 var nthUglyNumber = function(n) {
-    if(n<=0) return []
-    
-    const uglyDP = new Array(n)
-    uglyDP[0] = 1
-    let [i,j,k] = [0,0,0]
-    for(let l = 1; l < n; l++){
-        uglyDP[l] = Math.min(uglyDP[i]*2,uglyDP[j]*3,uglyDP[k]*5)
-        if(uglyDP[l] === uglyDP[i]*2 ) i++
-        if(uglyDP[l] === uglyDP[j]*3 ) j++
-        if(uglyDP[l] === uglyDP[k]*5 ) k++
-    }
-    
-    return uglyDP[uglyDP.length-1]
+  if (n <= 0) return [];
+
+  const uglyDP = new Array(n);
+  uglyDP[0] = 1;
+  let [i, j, k] = [0, 0, 0];
+  for (let l = 1; l < n; l++) {
+    uglyDP[l] = Math.min(uglyDP[i] * 2, uglyDP[j] * 3, uglyDP[k] * 5);
+    if (uglyDP[l] === uglyDP[i] * 2) i++;
+    if (uglyDP[l] === uglyDP[j] * 3) j++;
+    if (uglyDP[l] === uglyDP[k] * 5) k++;
+  }
+
+  return uglyDP[uglyDP.length - 1];
 };

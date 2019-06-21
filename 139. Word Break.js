@@ -28,21 +28,23 @@ Output: false
  * @return {boolean}
  */
 // DP O(n^2) O(n)
-var wordBreak = function (s, wordDict) {
-  let wordMap = new Set([...wordDict])
-  let dp = new Array(s.length + 1).fill(false)
-  dp[0] = true
+var wordBreak = function(s, wordDict) {
+  let wordMap = new Set([...wordDict]);
+  let dp = new Array(s.length + 1).fill(false);
+  dp[0] = true;
 
-  for (let i = 1; i <= s.length; i++) { //right pointer
-    for (let j = 0; j < i; j++) { //left pointer
+  for (let i = 1; i <= s.length; i++) {
+    //right pointer
+    for (let j = 0; j < i; j++) {
+      //left pointer
       if (dp[j] && wordMap.has(s.substring(j, i))) {
         dp[i] = true;
-        break
+        break;
       }
     }
   }
-  console.log(dp)
-  return dp[s.length]
+  console.log(dp);
+  return dp[s.length];
 };
 
 /**
@@ -52,23 +54,21 @@ var wordBreak = function (s, wordDict) {
  */
 // bfs O(n^2) O(n)
 var wordBreak = function(s, wordDict) {
-  let wordSet = new Set([...wordDict])
-  let visited = new Set()
-  let queue = []
+  let wordSet = new Set([...wordDict]);
+  let visited = new Set();
+  let queue = [];
 
-  queue.unshift(0)// push start index
-  while(queue.length > 0){ 
-      let start = queue.pop()
-      if(visited.has(start)) continue
-      for(let i = start +1; i <= s.length;i++){
-          if(wordSet.has(s.substring(start, i))){
-              queue.unshift(i)
-              if(i === s.length) return true
-          }
+  queue.unshift(0); // push start index
+  while (queue.length > 0) {
+    let start = queue.pop();
+    if (visited.has(start)) continue;
+    for (let i = start + 1; i <= s.length; i++) {
+      if (wordSet.has(s.substring(start, i))) {
+        queue.unshift(i);
+        if (i === s.length) return true;
       }
-      visited.add(start)
-      
+    }
+    visited.add(start);
   }
-  return false
+  return false;
 };
-  

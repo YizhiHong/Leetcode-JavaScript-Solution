@@ -44,39 +44,46 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 //solution 1: tricky way  O(n)
 var intToRoman = function(num) {
-    let M = ["", "M", "MM", "MMM"],
-        C = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"],
-        X = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"],
-        I = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
-    console.log(~~((num%1000)/100))
-    return M[~~(num/1000)] + C[~~((num%1000)/100)] + X[~~(num%100/10)] + I[num%10];
+  let M = ["", "M", "MM", "MMM"],
+    C = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"],
+    X = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"],
+    I = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+  console.log(~~((num % 1000) / 100));
+  return (
+    M[~~(num / 1000)] +
+    C[~~((num % 1000) / 100)] +
+    X[~~((num % 100) / 10)] +
+    I[num % 10]
+  );
 };
-
 
 // faster way O(n)
 var intToRoman = function(num) {
-    let dict = [['1000', 'M'],
-                ['900', 'CM'],
-                ['500', 'D'],
-                ['400', 'CD'],
-                ['100', 'C'],
-                ['90', 'XC'],
-                ['50', 'L'],
-                ['40', 'XL'],
-                ['10', 'X'],
-                ['9', 'IX'],
-                ['5', 'V'],
-                ['4', 'IV'],
-                ['1', 'I']],
-        res = '',index = 0;
-    
-    while (num >0){
-        if(num >= dict[index][0]){
-            res = res + dict[index][1]
-            num = num - dict[index][0]
-        }else{
-            index++
-        }
+  let dict = [
+      ["1000", "M"],
+      ["900", "CM"],
+      ["500", "D"],
+      ["400", "CD"],
+      ["100", "C"],
+      ["90", "XC"],
+      ["50", "L"],
+      ["40", "XL"],
+      ["10", "X"],
+      ["9", "IX"],
+      ["5", "V"],
+      ["4", "IV"],
+      ["1", "I"]
+    ],
+    res = "",
+    index = 0;
+
+  while (num > 0) {
+    if (num >= dict[index][0]) {
+      res = res + dict[index][1];
+      num = num - dict[index][0];
+    } else {
+      index++;
     }
-    return res
+  }
+  return res;
 };

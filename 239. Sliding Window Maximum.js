@@ -20,55 +20,53 @@ You may assume k is always valid, 1 ≤ k ≤ input array's size for non-empty a
 
 Follow up:
 Could you solve it in linear time?
-*/ 
+*/
 
 /* O(n) */
 
 var maxSlidingWindow = function(nums, k) {
-    if(nums.length === 0) return []
-     // sort the first window and apply to result
-    let queue = [],
-        res = []
-    
-    
-    for(let i = 0; i< nums.length;i++){
-        // remove index below the window
-        while(queue.length !== 0 && queue[queue.length-1] < i - k + 1){
-            queue.pop()
-        }
-        while(queue.length !== 0 && nums[queue[0]] < nums[i]){
-            queue.shift()      
-        }
-        
-        queue.unshift(i)
+  if (nums.length === 0) return [];
+  // sort the first window and apply to result
+  let queue = [],
+    res = [];
 
-        if( i >= k -1) {
-            res.push(nums[queue[queue.length-1]])
-        }
+  for (let i = 0; i < nums.length; i++) {
+    // remove index below the window
+    while (queue.length !== 0 && queue[queue.length - 1] < i - k + 1) {
+      queue.pop();
     }
-    
-    return res  
+    while (queue.length !== 0 && nums[queue[0]] < nums[i]) {
+      queue.shift();
+    }
+
+    queue.unshift(i);
+
+    if (i >= k - 1) {
+      res.push(nums[queue[queue.length - 1]]);
+    }
+  }
+
+  return res;
 };
 // O(n)
 
 var maxSlidingWindow = function(nums, k) {
-    if(nums.length === 0) return []
-     // sort the first window and apply to result
-    let queue = [],
-        res = []
-    
-    
-    for(let i = 0; i< nums.length;i++){
-        let firstIdx =  i - k + 1
-        // remove index below the window
-        while(queue.length && queue[queue.length-1] < nums[i]){
-            queue.pop()
-        }
-        queue.push(nums[i])
-        if(firstIdx < 0) continue
-        res.push(queue[0])
-        if(queue.length && nums[firstIdx] === queue[0]) queue.shift()
+  if (nums.length === 0) return [];
+  // sort the first window and apply to result
+  let queue = [],
+    res = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    let firstIdx = i - k + 1;
+    // remove index below the window
+    while (queue.length && queue[queue.length - 1] < nums[i]) {
+      queue.pop();
     }
-    
-    return res  
+    queue.push(nums[i]);
+    if (firstIdx < 0) continue;
+    res.push(queue[0]);
+    if (queue.length && nums[firstIdx] === queue[0]) queue.shift();
+  }
+
+  return res;
 };

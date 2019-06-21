@@ -13,14 +13,14 @@
 
 /** recursive */
 var buildTree = function(preorder, inorder) {
-    let root = null
-    if (inorder.length > 0) {
-        let index = inorder.indexOf(preorder.shift())
-        root = new TreeNode(inorder[index])
-        root.left = buildTree(preorder,inorder.slice(0,index))
-        root.right = buildTree(preorder,inorder.slice(index+1,inorder.length))
-    }
-    return root
+  let root = null;
+  if (inorder.length > 0) {
+    let index = inorder.indexOf(preorder.shift());
+    root = new TreeNode(inorder[index]);
+    root.left = buildTree(preorder, inorder.slice(0, index));
+    root.right = buildTree(preorder, inorder.slice(index + 1, inorder.length));
+  }
+  return root;
 };
 
 /** Iterative */

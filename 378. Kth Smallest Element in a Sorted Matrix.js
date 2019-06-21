@@ -18,30 +18,30 @@ return 13.
 // O(nlog(n*n)) O(1)
 
 var kthSmallest = function(matrix, k) {
-    if(matrix.length === 0) return -1
-    
-    let lo = matrix[0][0],
-        m = matrix.length,
-        hi = matrix[m-1][m-1]
-    
-    while (lo < hi){
-        let mid = ~~((lo+hi)/2)
-        if (enough(mid)){
-            hi = mid
-        }else{
-            lo = mid + 1
-        }
+  if (matrix.length === 0) return -1;
+
+  let lo = matrix[0][0],
+    m = matrix.length,
+    hi = matrix[m - 1][m - 1];
+
+  while (lo < hi) {
+    let mid = ~~((lo + hi) / 2);
+    if (enough(mid)) {
+      hi = mid;
+    } else {
+      lo = mid + 1;
     }
-    
-    return lo
-    
-    function enough(n){
-        let count = 0
-        for(let i = 0; i < m; i++){
-            let j = m - 1
-            while(j >= 0 && matrix[i][j] > n) j--
-            count = count + j+1
-        }
-        return count >= k
+  }
+
+  return lo;
+
+  function enough(n) {
+    let count = 0;
+    for (let i = 0; i < m; i++) {
+      let j = m - 1;
+      while (j >= 0 && matrix[i][j] > n) j--;
+      count = count + j + 1;
     }
+    return count >= k;
+  }
 };

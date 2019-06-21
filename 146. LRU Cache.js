@@ -35,14 +35,14 @@ class LRUCache {
   }
   get(key) {
     if (this.hashMap.has(key)) {
-      let node = this.hashMap.get(key)
+      let node = this.hashMap.get(key);
       this.update(node);
       return node.value; // return the value
     } else return -1;
   }
   // this method is to update if any get/put current node in the cache
   update(node, value = null) {
-    let newNode = this.cache.append(node.key, value || node.value).tail; // 
+    let newNode = this.cache.append(node.key, value || node.value).tail; //
     this.cache.erase(node); // erase the node
     this.hashMap.set(node.key, newNode); // overwrite the newNode to hashMap
   }
@@ -106,7 +106,7 @@ class LRUCache {
  * 
 */
 
-/** 
+/**
  * Your LRUCache object will be instantiated and called as such:
  * var obj = new LRUCache(capacity)
  * var param_1 = obj.get(key)
@@ -140,7 +140,6 @@ class Comparator {
   }
 }
 
-
 class DoublyLinkedList {
   /**
    * @param {Function} [comparatorFunction]
@@ -151,28 +150,28 @@ class DoublyLinkedList {
 
     this.compare = new Comparator(comparatorFunction);
   }
-    
-    erase(node){
-        if(node === this.head){
-            return this.deleteHead()
-        }else if(node === this.tail) {
-            return this.deleteTail()
-        }
-        if(node.previous !== null){
-            node.previous.next = node.next
-        }
-        if(node.next !== null){
-            node.next.previous = node.previous
-        }
+
+  erase(node) {
+    if (node === this.head) {
+      return this.deleteHead();
+    } else if (node === this.tail) {
+      return this.deleteTail();
     }
-    
+    if (node.previous !== null) {
+      node.previous.next = node.next;
+    }
+    if (node.next !== null) {
+      node.next.previous = node.previous;
+    }
+  }
+
   /**
    * @param {*} value
    * @return {DoublyLinkedList}
    */
   prepend(key, value) {
     // Make new node to be a head.
-    const newNode = new DoublyLinkedListNode(key ,value, this.head);
+    const newNode = new DoublyLinkedListNode(key, value, this.head);
 
     // If there is head, then it won't be head anymore.
     // Therefore, make its previous reference to be new node (new head).
@@ -216,7 +215,7 @@ class DoublyLinkedList {
 
     return this;
   }
-    
+
   /**
    * @return {DoublyLinkedListNode}
    */

@@ -14,16 +14,16 @@ Elements of the given array will be in the range [-10,000, 10,000].
  * @param {number} k
  * @return {number}
  */
-var findMaxAverage = function(nums, k) {    
-    let max = 0,
-        temp
-    for(let i = 0; i< k;i++){
-        max = max + nums[i]
-    }
-    temp = max
-    for(let i = k; i< nums.length ; i++){ 
-        temp = -nums[i-k] + temp + nums[i] // keep moving k value by remove first and add last
-        if(temp > max) max = temp
-    }
-    return max/k
+var findMaxAverage = function(nums, k) {
+  let max = 0,
+    temp;
+  for (let i = 0; i < k; i++) {
+    max = max + nums[i];
+  }
+  temp = max;
+  for (let i = k; i < nums.length; i++) {
+    temp = -nums[i - k] + temp + nums[i]; // keep moving k value by remove first and add last
+    if (temp > max) max = temp;
+  }
+  return max / k;
 };

@@ -26,31 +26,30 @@ Would this affect the run-time complexity? How and why?
  * @return {boolean}
  */
 var search = function(nums, target) {
-    let lo = 0,
-        hi = nums.length - 1,
-        mid;
-    
-    while(lo <= hi){
-        mid = (lo + hi)>>1;
-        if(nums[mid] === target) return true
-        
-        if(nums[mid] === nums[lo]) {
-            lo++
-        }else if( (nums[mid] < nums[lo]) === (target < nums[lo])){
-            if(nums[mid] < target){
-                lo = mid +1
-            }else{
-                hi = mid -1
-            }
-        }else{
-            if(target >= nums[lo]){
-                hi = mid - 1
-            }else{
-                lo = mid + 1
-            }
-            
-        }
+  let lo = 0,
+    hi = nums.length - 1,
+    mid;
+
+  while (lo <= hi) {
+    mid = (lo + hi) >> 1;
+    if (nums[mid] === target) return true;
+
+    if (nums[mid] === nums[lo]) {
+      lo++;
+    } else if (nums[mid] < nums[lo] === target < nums[lo]) {
+      if (nums[mid] < target) {
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    } else {
+      if (target >= nums[lo]) {
+        hi = mid - 1;
+      } else {
+        lo = mid + 1;
+      }
     }
-    
-    return false
+  }
+
+  return false;
 };

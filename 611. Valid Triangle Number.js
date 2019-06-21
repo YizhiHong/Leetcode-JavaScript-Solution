@@ -20,40 +20,38 @@ The integers in the given array are in the range of [0, 1000].
 
 // S1:O(n^2) O(1)
 
-var triangleNumber = function(nums) {    
-    let res = 0
-    
-    nums.sort((a,b)=>a-b)
+var triangleNumber = function(nums) {
+  let res = 0;
 
-    for(let i = 0; i < nums.length - 2; i++){
-        for(let j = i+1; j < nums.length - 1;j++){
-            let k = j + 1;
-            while(k < nums.length && nums[i]+nums[j] > nums[k]) k++
-            res = res + k - 1 - j
-        }   
+  nums.sort((a, b) => a - b);
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    for (let j = i + 1; j < nums.length - 1; j++) {
+      let k = j + 1;
+      while (k < nums.length && nums[i] + nums[j] > nums[k]) k++;
+      res = res + k - 1 - j;
     }
-    return res
+  }
+  return res;
 };
 
 // S2:O(n^2) O(1)
-var triangleNumber = function(nums) {    
-    let res = 0
-    nums.sort((a,b)=>a-b)
-    
-    for(let k = 2; k < nums.length; k++){
-        let i = 0,
-            j = k-1
-        
-        while(i < j){
-            if(nums[k] < nums[i]+nums[j]){
-                res = res + j - i 
-                j--
-            }else{
-                i++
-            }
-        }
+var triangleNumber = function(nums) {
+  let res = 0;
+  nums.sort((a, b) => a - b);
+
+  for (let k = 2; k < nums.length; k++) {
+    let i = 0,
+      j = k - 1;
+
+    while (i < j) {
+      if (nums[k] < nums[i] + nums[j]) {
+        res = res + j - i;
+        j--;
+      } else {
+        i++;
+      }
     }
-    return res
+  }
+  return res;
 };
-
-

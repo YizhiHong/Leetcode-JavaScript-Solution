@@ -1,4 +1,5 @@
-from itertools import chain 
+from itertools import chain
+
 
 class Solution:
     def matrixReshape(self, nums, r, c):
@@ -12,4 +13,3 @@ class Solution:
             return list(zip(*[chain.from_iterable(nums)] * c))
         else:
             return nums
-                    

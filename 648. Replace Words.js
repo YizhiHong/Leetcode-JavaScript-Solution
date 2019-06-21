@@ -9,7 +9,6 @@
 // Input: dict = ["cat", "bat", "rat"]
 // sentence = "the cattle was rattled by the battery"
 // Output: "the cat was rat by the bat"
- 
 
 // Note:
 
@@ -19,63 +18,63 @@
 // 1 <= root length <= 100
 // 1 <= sentence words length <= 1000
 
-
 /**
  * @param {string[]} dict
  * @param {string} sentence
  * @return {string}
  */
 var replaceWords = function(dict, sentence) {
-     /**
-     * Initialize your data structure here.
-     */
-    var Trie = function() {
-        this.node = {}
-        this.word = null
-    };
+  /**
+   * Initialize your data structure here.
+   */
+  var Trie = function() {
+    this.node = {};
+    this.word = null;
+  };
 
-    /**
-     * Inserts a word into the trie. 
-     * @param {string} word
-     * @return {void}
-     */
-    Trie.prototype.insert = function(word) {
-        let curr = this
-        for(let w of word){
-            if (!curr.node[w]){
-                curr.node[w] = new Trie()
-            }
-            curr = curr.node[w]
-        }
-        curr.word = word
-    };
+  /**
+   * Inserts a word into the trie.
+   * @param {string} word
+   * @return {void}
+   */
+  Trie.prototype.insert = function(word) {
+    let curr = this;
+    for (let w of word) {
+      if (!curr.node[w]) {
+        curr.node[w] = new Trie();
+      }
+      curr = curr.node[w];
+    }
+    curr.word = word;
+  };
 
-    let trie = new Trie()
-    
-    for (let w of dict){
-        trie.insert(w)
+  let trie = new Trie();
+
+  for (let w of dict) {
+    trie.insert(w);
+  }
+
+  let res = "";
+
+  for (let word of sentence.split(" ")) {
+    let curr = trie;
+    for (let w of word) {
+      if (!curr.node[w] || curr.word !== null) {
+        break;
+      }
+      curr = curr.node[w];
     }
-    
-    let res = ""
-    
-    for (let word of sentence.split(" ")){
-        let curr = trie
-        for(let w of word){
-            if( !curr.node[w] || curr.word !== null){
-                break
-            }
-            curr = curr.node[w]
-        }
-        res += curr.word !== null ? curr.word : word
-        res = res + " "
-    }
-    
-    return res.substring(0, res.length - 1)
+    res += curr.word !== null ? curr.word : word;
+    res = res + " ";
+  }
+
+  return res.substring(0, res.length - 1);
 };
-
 
 //solution 2: reg
 var replaceWords = function(dict, sentence) {
-    return sentence.replace( new RegExp(`\\b(${dict.join("|")}).*?\\b`, "g"), "$1" );
-}
-
+  return sentence.replace(
+    new RegExp(`\\b(${dict.join("|")}).*?\\b`, "g"),
+    "$1"
+  );
+};

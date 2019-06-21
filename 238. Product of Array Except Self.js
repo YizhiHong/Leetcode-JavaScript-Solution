@@ -20,15 +20,15 @@ Could you solve it with constant space complexity? (The output array does not co
 
 //O(n) O(1)
 var productExceptSelf = function(nums) {
-    const output = new Array(nums.length)
-    output[0] = 1
-    for(let i = 1 ; i< nums.length; i++){
-        output[i] = nums[i - 1]*output[i-1]
-    }
-    let right = 1
-    for (let i = nums.length -1; i>=0; i--){
-        output[i] = output[i] * right
-        right *= nums[i]
-    }
-    return output
+  const output = new Array(nums.length);
+  output[0] = 1;
+  for (let i = 1; i < nums.length; i++) {
+    output[i] = nums[i - 1] * output[i - 1];
+  }
+  let right = 1;
+  for (let i = nums.length - 1; i >= 0; i--) {
+    output[i] = output[i] * right;
+    right *= nums[i];
+  }
+  return output;
 };

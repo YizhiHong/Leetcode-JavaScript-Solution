@@ -5,7 +5,7 @@
 # Example 1:
 # Input:[[4,10,15,24,26], [0,9,12,20], [5,18,22,30]]
 # Output: [20,24]
-# Explanation: 
+# Explanation:
 # List 1: [4, 10, 15, 24,26], 24 is in range [20,24].
 # List 2: [0, 9, 12, 20], 20 is in range [20,24].
 # List 3: [5, 18, 22, 30], 22 is in range [20,24].
@@ -17,27 +17,28 @@
 
 from queue import PriorityQueue as PQ
 
+
 class Solution:
     def smallestRange(self, nums: 'List[List[int]]') -> 'List[int]':
         min_pq = PQ()
-        k_index= [0] * len(nums)
+        k_index = [0] * len(nums)
         right = -10**5
-        res = (-10**5,10**5)
-        
-        for i,j in enumerate(k_index):
-            min_pq.put((nums[i][j],i,j))
-            right = max(right,nums[i][j])
-        
+        res = (-10**5, 10**5)
+
+        for i, j in enumerate(k_index):
+            min_pq.put((nums[i][j], i, j))
+            right = max(right, nums[i][j])
+
         while min_pq:
-            left,k,i = min_pq.get()
-            if right - left  < res[1] - res[0]:
-                res = (left,right)
-            
+            left, k, i = min_pq.get()
+            if right - left < res[1] - res[0]:
+                res = (left, right)
+
             if i + 1 == len(nums[k]):
                 return res
-            
+
             temp = nums[k][i+1]
-            right = max(temp,right)
-            min_pq.put((temp,k, i+1))
+            right = max(temp, right)
+            min_pq.put((temp, k, i+1))
 
 # solution

@@ -10,28 +10,29 @@
  * @return {ListNode}
  */
 
- function ListNode(val) {
-    this.val = val;
-    this.next = null;
+function ListNode(val) {
+  this.val = val;
+  this.next = null;
 }
 
+/** iterative Solution **/
 
-/** iterative Solution **/ 
 var reverseList = function(head) {
-    let prev = null
-    let next = null
-    let curr = head
-    
-    while(curr !== null){
-        next = curr.next;
-        curr.next = prev;
-        prev = curr;
-        curr = next;
-    }
-    return prev
+  let prev = null;
+  let next = null;
+  let curr = head;
+
+  while (curr !== null) {
+    next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
 };
 
-/** recursive Solution **/ 
+/** recursive Solution **/
+
 /**
 The recursive version is slightly trickier and the key is to work backwards. 
 Assume that the rest of the list had already been reversed, now how do I reverse the front part? 
@@ -47,9 +48,11 @@ Be very careful that n1's next must point to Ø. If you forget about this, your 
 This bug could be caught if you test your code with a linked list of size 2.
 */
 var reverseList = function(head) {
-    if(head === null || head.next === null) {return head}
-    let prev = reverseList(head.next)
-    head.next.next = head
-    head.next = null
-    return prev
+  if (head === null || head.next === null) {
+    return head;
+  }
+  let prev = reverseList(head.next);
+  head.next.next = head;
+  head.next = null;
+  return prev;
 };

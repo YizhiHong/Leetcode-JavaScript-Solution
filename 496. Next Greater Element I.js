@@ -24,19 +24,19 @@ The length of both nums1 and nums2 would not exceed 1000.
 
 //O(n) O(n)
 var nextGreaterElement = function(nums1, nums2) {
-    let stack = [],
-        hashTable = {}
-    
-    for(let num of nums2){
-        while(stack.length > 0 && stack[stack.length-1] < num){
-            hashTable[stack.pop()] = num
-        }
-        stack.push(num)
+  let stack = [],
+    hashTable = {};
+
+  for (let num of nums2) {
+    while (stack.length > 0 && stack[stack.length - 1] < num) {
+      hashTable[stack.pop()] = num;
     }
-    
-    let res = new Array(nums1.length)
-    for(let i = 0; i < nums1.length; i++){
-        res[i] = hashTable[nums1[i]] || -1
-    }
-    return res
+    stack.push(num);
+  }
+
+  let res = new Array(nums1.length);
+  for (let i = 0; i < nums1.length; i++) {
+    res[i] = hashTable[nums1[i]] || -1;
+  }
+  return res;
 };

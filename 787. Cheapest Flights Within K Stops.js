@@ -51,23 +51,21 @@ There will not be any duplicated flights or self cycles.
     we need to limit the cost can only be updated 1 time per iteration. 
 */
 var findCheapestPrice = function(n, flights, src, dst, K) {
-    // bellman ford
-    let cost = new Array(n).fill(Infinity)
-    cost[src] = 0
-    
-    for (let i = 0; i <= K; i++){
-        let nextCost = [...cost]
-        for(let [v1,v2,c] of flights) {
-            if(nextCost[v2] > cost[v1] + c){
-                nextCost[v2] = cost[v1] + c
-            }
-        }
-        cost = nextCost
-    }
-    return cost[dst] === Infinity ? -1 : cost[dst]
-    
-};
+  // bellman ford
+  let cost = new Array(n).fill(Infinity);
+  cost[src] = 0;
 
+  for (let i = 0; i <= K; i++) {
+    let nextCost = [...cost];
+    for (let [v1, v2, c] of flights) {
+      if (nextCost[v2] > cost[v1] + c) {
+        nextCost[v2] = cost[v1] + c;
+      }
+    }
+    cost = nextCost;
+  }
+  return cost[dst] === Infinity ? -1 : cost[dst];
+};
 
 /** method 2: BFS
 

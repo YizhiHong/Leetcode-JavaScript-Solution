@@ -20,7 +20,7 @@ The order of your output does not matter.
  * @return {string[][]}
  */
 
- // O(NK) O(NK)
+// O(NK) O(NK)
 var groupAnagrams = function(strs) {
   let count = new Array(26).fill(0),
     res = new Map(),

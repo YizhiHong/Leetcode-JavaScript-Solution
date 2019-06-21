@@ -13,17 +13,17 @@ Output: ["AAAAACCCCC", "CCCCCAAAAA"]
 /** Solution1: two set O(n) O(n) **/
 
 var findRepeatedDnaSequences = function(s) {
-    let len = 10,
-        visited = new Set(),
-        result = new Set()
-    
-    for(let i = 0; i < s.length - len + 1 ;i++){
-        let str = s.substring(i, i + len)
-        if(visited.has(str)) {
-            result.add(str)
-        }else{
-            visited.add(str)
-        }
+  let len = 10,
+    visited = new Set(),
+    result = new Set();
+
+  for (let i = 0; i < s.length - len + 1; i++) {
+    let str = s.substring(i, i + len);
+    if (visited.has(str)) {
+      result.add(str);
+    } else {
+      visited.add(str);
     }
-    return Array.from(result)
+  }
+  return Array.from(result);
 };

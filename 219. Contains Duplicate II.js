@@ -18,13 +18,13 @@ Input: nums = [1,2,3,1,2,3], k = 2
 Output: false
  */
 var containsNearbyDuplicate = function(nums, k) {
-    let checkMap = new Map()
-    for(let i = 0;  i < nums.length; i++){
-        if(checkMap.has(nums[i]) && i - checkMap.get(nums[i]) <= k){
-            return true
-        }else{
-            checkMap.set(nums[i],i)
-        }   
+  let checkMap = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    if (checkMap.has(nums[i]) && i - checkMap.get(nums[i]) <= k) {
+      return true;
+    } else {
+      checkMap.set(nums[i], i);
     }
-    return false
+  }
+  return false;
 };

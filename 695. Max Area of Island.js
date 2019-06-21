@@ -24,59 +24,62 @@ Note: The length of each dimension in the given grid does not exceed 50.
 
 // O(R*C) O(R*C)
 var maxAreaOfIsland = function(grid) {
-    let max = 0
-    if(grid.length === 0) return max
-    
-    for(let i = 0; i< grid.length; i++){
-        for(let j = 0; j< grid[0].length; j++){
-            if(grid[i][j] === 1){
-                max = Math.max(max,findMax(0,i,j))
-            } 
-        }
+  let max = 0;
+  if (grid.length === 0) return max;
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      if (grid[i][j] === 1) {
+        max = Math.max(max, findMax(0, i, j));
+      }
     }
-    
-    return max
-    
-    function findMax(count,r,c){
-        if(grid[r][c] === 1){
-            grid[r][c] = 0
-            let temp = count
-            if(r > 0) count += findMax(temp,r-1,c)
-            if(c > 0) count += findMax(temp,r,c-1)
-            if(r < grid.length-1) count += findMax(temp,r+1,c)
-            if(c < grid[0].length-1) count += findMax(temp,r,c+1)
-            return count + 1
-        }else{
-            return 0
-        }
+  }
+
+  return max;
+
+  function findMax(count, r, c) {
+    if (grid[r][c] === 1) {
+      grid[r][c] = 0;
+      let temp = count;
+      if (r > 0) count += findMax(temp, r - 1, c);
+      if (c > 0) count += findMax(temp, r, c - 1);
+      if (r < grid.length - 1) count += findMax(temp, r + 1, c);
+      if (c < grid[0].length - 1) count += findMax(temp, r, c + 1);
+      return count + 1;
+    } else {
+      return 0;
     }
+  }
 };
 
 // Method 2
 var maxAreaOfIsland = function(grid) {
-    let max = 0
-    if(grid.length === 0) return max
-    
-    for(let i = 0; i< grid.length; i++){
-        for(let j = 0; j< grid[0].length; j++){
-            if(grid[i][j] === 1){
-                max = Math.max(max, Area(i,j))
-            } 
-        }
+  let max = 0;
+  if (grid.length === 0) return max;
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      if (grid[i][j] === 1) {
+        max = Math.max(max, Area(i, j));
+      }
     }
-    
-    return max
-    
-    function Area(r,c){
-        if(   r < 0 
-           || c < 0 
-           || r > grid.length - 1 
-           || c > grid[0].length - 1
-           || grid[r][c] === 0
-          ){
-            return 0
-        }
-        grid[r][c] = 0
-        return 1 + Area(r+1,c) + Area(r-1,c) + Area(r,c+1) + Area(r,c-1)   
+  }
+
+  return max;
+
+  function Area(r, c) {
+    if (
+      r < 0 ||
+      c < 0 ||
+      r > grid.length - 1 ||
+      c > grid[0].length - 1 ||
+      grid[r][c] === 0
+    ) {
+      return 0;
     }
+    grid[r][c] = 0;
+    return (
+      1 + Area(r + 1, c) + Area(r - 1, c) + Area(r, c + 1) + Area(r, c - 1)
+    );
+  }
 };

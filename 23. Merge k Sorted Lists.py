@@ -19,23 +19,24 @@
 
 from queue import PriorityQueue as PQ
 
+
 class Solution:
-    
+
     def mergeKLists(self, lists: 'List[ListNode]') -> 'ListNode':
-        head = point =  ListNode(0)
+        head = point = ListNode(0)
         count = 0
-        pq = PQ() # init a priority queue
+        pq = PQ()  # init a priority queue
         for l in lists:
             if l:
-                pq.put((l.val,count,l)) # push first value in to heap
+                pq.put((l.val, count, l))  # push first value in to heap
                 count += 1
-        
+
         while not pq.empty():
-            val, _ ,node = pq.get()
+            val, _, node = pq.get()
             point.next = ListNode(val)
             point = point.next
             node = node.next
             if node:
-                pq.put((node.val,_,node))
-        
+                pq.put((node.val, _, node))
+
         return head.next

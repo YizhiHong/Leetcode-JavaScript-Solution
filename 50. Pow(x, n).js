@@ -22,26 +22,25 @@ n is a 32-bit signed integer, within the range [−231, 231 − 1]
 
 //Solution 1
 var myPow = function(x, n) {
-    let res = 1
-    if(n > 0){
-        res = x**n
-    }else if(n < 0){
-        res = (1/x)**Math.abs(n)
-    }
-    
-    return res
+  let res = 1;
+  if (n > 0) {
+    res = x ** n;
+  } else if (n < 0) {
+    res = (1 / x) ** Math.abs(n);
+  }
+
+  return res;
 };
 
 //Solution 2: recusive
 var myPow = function(x, n) {
-    if(n === 0) return 1
-    
-    let t = myPow(x,~~(n/2))
-    
-    if(n %2) {
-        return n<0 ? 1/x*t*t : x*t*t
-    }else{
-        return t*t
-    }
-};
+  if (n === 0) return 1;
 
+  let t = myPow(x, ~~(n / 2));
+
+  if (n % 2) {
+    return n < 0 ? (1 / x) * t * t : x * t * t;
+  } else {
+    return t * t;
+  }
+};

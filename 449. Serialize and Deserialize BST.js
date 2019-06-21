@@ -18,32 +18,32 @@ Note: Do not use class member/global/static variables to store states. Your seri
  */
 let _preorder = (node, s) => {
   if (node === null) return "";
-  s = node.val + ','
-  s += _preorder(node.left)
-  s += _preorder(node.right)
-  return s
-}
+  s = node.val + ",";
+  s += _preorder(node.left);
+  s += _preorder(node.right);
+  return s;
+};
 
 let _deserialize = (lo, hi, nums) => {
-  if (nums.length === 0) return null
-  let val = Number(nums[0])
+  if (nums.length === 0) return null;
+  let val = Number(nums[0]);
   if (val < lo || val > hi) return null;
 
-  nums.shift()
-  let root = new TreeNode(val)
-  root.left = _deserialize(lo, val, nums)
-  root.right = _deserialize(val, hi, nums)
-  return root
-}
+  nums.shift();
+  let root = new TreeNode(val);
+  root.left = _deserialize(lo, val, nums);
+  root.right = _deserialize(val, hi, nums);
+  return root;
+};
 /**
  * Encodes a tree to a single string.
  *
  * @param {TreeNode} root
  * @return {string}
  */
-var serialize = function (root) {
-  let s = _preorder(root, "")
-  return s.slice(0, -1)
+var serialize = function(root) {
+  let s = _preorder(root, "");
+  return s.slice(0, -1);
 };
 
 /**
@@ -52,10 +52,10 @@ var serialize = function (root) {
  * @param {string} data
  * @return {TreeNode}
  */
-var deserialize = function (data) {
-  if (data === "") return null
-  nums = data.split(",")
-  return _deserialize(-Infinity, Infinity, nums)
+var deserialize = function(data) {
+  if (data === "") return null;
+  nums = data.split(",");
+  return _deserialize(-Infinity, Infinity, nums);
 };
 
 /**

@@ -17,38 +17,54 @@ Output:
 
 */
 var toHex = function(num) {
-    if (num === 0) return "0"
-    let hex = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"],
-        res = ""
-    
-    while(num){
-        res = hex[num&15] + res
-        num = num >>> 4
-    }
-    return res
+  if (num === 0) return "0";
+  let hex = [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f"
+    ],
+    res = "";
+
+  while (num) {
+    res = hex[num & 15] + res;
+    num = num >>> 4;
+  }
+  return res;
 };
 
 //** method 2
 
 var toHex = function(num) {
-    const hex = (d) =>{
-        let r = d % 16;
-        if (d - r == 0) {
-            return toChar(r);
-        }
-        return hex((d - r)/16 ) + toChar(r);
+  const hex = d => {
+    let r = d % 16;
+    if (d - r == 0) {
+      return toChar(r);
     }
-  
-    const toChar = (n) => {
-        const alpha = "0123456789abcdef";
-        return alpha.charAt(n);
-    }
-    
-    if (num < 0) {
-        num += 2**32
-    }
-    
-    return hex(num)
-    
-    
-};d
+    return hex((d - r) / 16) + toChar(r);
+  };
+
+  const toChar = n => {
+    const alpha = "0123456789abcdef";
+    return alpha.charAt(n);
+  };
+
+  if (num < 0) {
+    num += 2 ** 32;
+  }
+
+  return hex(num);
+};
+d;

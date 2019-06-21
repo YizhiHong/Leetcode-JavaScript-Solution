@@ -28,7 +28,6 @@
     What if the BST is modified (insert/delete operations) often and you need to find the kth smallest frequently? How would you optimize the kthSmallest routine?
 */
 
-
 /**
  * Definition for a binary tree node.
  * function TreeNode(val) {
@@ -43,19 +42,20 @@ Given a binary search tree, write a function kthSmallest to find the kth smalles
  * @return {number}
  */
 var kthSmallest = function(root, k) {
-    if(root === null) return null
-    let stack = [], curr = root
-    
-    while(curr!== null || stack.length !== 0){
-        while(curr !== null){
-            stack.push(curr)
-            curr = curr.left
-        }
-        curr = stack.pop()
-        if(--k === 0) return curr.val
-        curr = curr.right
+  if (root === null) return null;
+  let stack = [],
+    curr = root;
+
+  while (curr !== null || stack.length !== 0) {
+    while (curr !== null) {
+      stack.push(curr);
+      curr = curr.left;
     }
-    return null
+    curr = stack.pop();
+    if (--k === 0) return curr.val;
+    curr = curr.right;
+  }
+  return null;
 };
 
 /** **** follow up: What if the BST is modified (insert/delete operations) often and you need to find the kth smallest frequently? 
@@ -65,20 +65,19 @@ optimized: construct a array to store result.
 */
 
 var kthSmallest = function(root, k) {
-    if(root === null) return null
-    
-    let result = []
-    let curr = root
-    
-    const constructResult = (node,ret) => {
-        if(node === null) return null
-        constructResult(node.left,ret)
-        ret.push(node.val)
-        constructResult(node.right,ret)
-        
-    }
-    
-    constructResult(curr,result)
-    
-    return result[k-1]
+  if (root === null) return null;
+
+  let result = [];
+  let curr = root;
+
+  const constructResult = (node, ret) => {
+    if (node === null) return null;
+    constructResult(node.left, ret);
+    ret.push(node.val);
+    constructResult(node.right, ret);
+  };
+
+  constructResult(curr, result);
+
+  return result[k - 1];
 };

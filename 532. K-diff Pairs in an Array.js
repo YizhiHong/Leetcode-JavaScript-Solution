@@ -24,32 +24,32 @@
     All the integers in the given input 
  */
 
- /**
+/**
     O(n) O(n)
  */
 var findPairs = function(nums, k) {
-    if(nums.length === 0 || k<0) return 0
-    
-    let diff = new Map();
-    let res = 0
-    
-    for(let num of nums){
-        diff.has(num) ? diff.set(num,diff.get(num)+1): diff.set(num,0)
+  if (nums.length === 0 || k < 0) return 0;
+
+  let diff = new Map();
+  let res = 0;
+
+  for (let num of nums) {
+    diff.has(num) ? diff.set(num, diff.get(num) + 1) : diff.set(num, 0);
+  }
+  // initialize the map
+  if (k === 0) {
+    for (let value of diff.values()) {
+      if (value > 0) res++;
     }
-    // initialize the map
-    if(k === 0) {
-        for(let value of diff.values()){
-            if(value > 0) res++
-        }
-        return res
+    return res;
+  }
+
+  for (let key of diff.keys()) {
+    if (diff.has(key - k)) {
+      res++;
     }
-    
-    for(let key of diff.keys()){
-        if(diff.has(key-k)){
-            res++
-        }
-    }
-    return res
+  }
+  return res;
 };
 
 /**
@@ -57,16 +57,16 @@ var findPairs = function(nums, k) {
 **/
 
 var findPairs = function(nums, k) {
-    if(k<0) return 0
-    
-    let lib = new Set();
-    let res = new Set()
-    
-    for(let num of nums){
-        if(lib.has(num-k)) res.add(num)
-        if(lib.has(num+k)) res.add(num+k)
-        lib.add(num)
-    }
-    
-    return res.size
+  if (k < 0) return 0;
+
+  let lib = new Set();
+  let res = new Set();
+
+  for (let num of nums) {
+    if (lib.has(num - k)) res.add(num);
+    if (lib.has(num + k)) res.add(num + k);
+    lib.add(num);
+  }
+
+  return res.size;
 };

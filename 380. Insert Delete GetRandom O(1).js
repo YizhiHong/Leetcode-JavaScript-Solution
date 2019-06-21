@@ -31,56 +31,56 @@ randomSet.insert(2);
 randomSet.getRandom();
  */
 
- // O(n) O(1) for all
+// O(n) O(1) for all
 
- /**
+/**
  * Initialize your data structure here.
  */
 var RandomizedSet = function() {
-  this.hashMap = new Map()
-  this.arr = []
+  this.hashMap = new Map();
+  this.arr = [];
 };
 
 /**
-* Inserts a value to the set. Returns true if the set did not already contain the specified element. 
-* @param {number} val
-* @return {boolean}
-*/
+ * Inserts a value to the set. Returns true if the set did not already contain the specified element.
+ * @param {number} val
+ * @return {boolean}
+ */
 RandomizedSet.prototype.insert = function(val) {
-  if(this.hashMap.has(val)) return false
-  this.hashMap.set(val, this.arr.length)
-  this.arr.push(val)
-  return true
+  if (this.hashMap.has(val)) return false;
+  this.hashMap.set(val, this.arr.length);
+  this.arr.push(val);
+  return true;
 };
 
 /**
-* Removes a value from the set. Returns true if the set contained the specified element. 
-* @param {number} val
-* @return {boolean}
-*/
+ * Removes a value from the set. Returns true if the set contained the specified element.
+ * @param {number} val
+ * @return {boolean}
+ */
 RandomizedSet.prototype.remove = function(val) {
   let hashMap = this.hashMap,
-      nums = this.arr
-  if(!hashMap.has(val)) return false
-  let last = nums[nums.length-1]
-  hashMap.set(last,hashMap.get(val))
-  nums[hashMap.get(val)] = last
-  nums.pop()
-  return hashMap.delete(val)
+    nums = this.arr;
+  if (!hashMap.has(val)) return false;
+  let last = nums[nums.length - 1];
+  hashMap.set(last, hashMap.get(val));
+  nums[hashMap.get(val)] = last;
+  nums.pop();
+  return hashMap.delete(val);
 };
 
 /**
-* Get a random element from the set.
-* @return {number}
-*/
+ * Get a random element from the set.
+ * @return {number}
+ */
 RandomizedSet.prototype.getRandom = function() {
-  return this.arr[Math.floor(Math.random()*this.arr.length)]
+  return this.arr[Math.floor(Math.random() * this.arr.length)];
 };
 
-/** 
-* Your RandomizedSet object will be instantiated and called as such:
-* var obj = new RandomizedSet()
-* var param_1 = obj.insert(val)
-* var param_2 = obj.remove(val)
-* var param_3 = obj.getRandom()
-*/
+/**
+ * Your RandomizedSet object will be instantiated and called as such:
+ * var obj = new RandomizedSet()
+ * var param_1 = obj.insert(val)
+ * var param_2 = obj.remove(val)
+ * var param_3 = obj.getRandom()
+ */

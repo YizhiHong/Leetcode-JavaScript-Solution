@@ -16,38 +16,38 @@ Output: [3,4]
  * @return {number[]}
  */
 var searchRange = function(nums, target) {
-    let res = [-1,-1]
-    if(nums.length === 0) return res
-    
-    let lo = 0, 
-        hi = nums.length - 1,
-        mid;
-    
-    while(lo <= hi){
-        mid = (lo+hi) >>1
-        if(nums[mid] >= target){
-            hi = mid - 1
-        }else{
-            lo = mid + 1
-        }
+  let res = [-1, -1];
+  if (nums.length === 0) return res;
+
+  let lo = 0,
+    hi = nums.length - 1,
+    mid;
+
+  while (lo <= hi) {
+    mid = (lo + hi) >> 1;
+    if (nums[mid] >= target) {
+      hi = mid - 1;
+    } else {
+      lo = mid + 1;
     }
-    //return left most 
-    if(nums[lo] !== target){
-        return res
+  }
+  //return left most
+  if (nums[lo] !== target) {
+    return res;
+  }
+  res[0] = lo;
+  lo = 0;
+  hi = nums.length - 1;
+
+  while (lo <= hi) {
+    mid = (lo + hi) >> 1;
+    if (nums[mid] > target) {
+      hi = mid - 1;
+    } else {
+      lo = mid + 1;
     }
-    res[0] = lo
-    lo = 0 
-    hi = nums.length - 1
-    
-    while(lo <= hi){
-        mid = (lo+hi) >>1
-        if(nums[mid] > target){
-            hi = mid - 1
-        }else{
-            lo = mid + 1
-        }
-    }
-    res[1] = hi
-    
-    return res
+  }
+  res[1] = hi;
+
+  return res;
 };

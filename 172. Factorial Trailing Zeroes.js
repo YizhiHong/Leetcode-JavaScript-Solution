@@ -21,16 +21,14 @@ Note: Your solution should be in logarithmic time complexity.
  * @return {number}
  */
 var trailingZeroes = function(n) {
-    
-    if (n < 5) return 0
-    
-    let count = 0
-    
-    while (n >= 5){
-        n =n/5
-        count += ~~(n)        
-    }
-    
-    return count
-    
+  if (n < 5) return 0;
+
+  let count = 0;
+
+  while (n >= 5) {
+    n = n / 5;
+    count += ~~n;
+  }
+
+  return count;
 };

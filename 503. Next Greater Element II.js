@@ -12,23 +12,21 @@ Note: The length of given array won't exceed 10000.
 
 // O(n) O(n)
 
-
 var nextGreaterElements = function(nums) {
-    Array.prototype.peek = function(){
-        return this[this.length-1]
-    }
-    let stack = [],
-        res = new Array(nums.length)
-    
-    for(let i = 2*(nums.length -1) ; i >= 0 ; i-- ){
-        let idx=i%nums.length
-        while(stack.length > 0 && nums[idx] >= nums[stack.peek()]){
-            stack.pop()
-        }
-        res[idx] = stack.length === 0 ? -1 : nums[stack.peek()]
-        stack.push(idx)
-    }
+  Array.prototype.peek = function() {
+    return this[this.length - 1];
+  };
+  let stack = [],
+    res = new Array(nums.length);
 
-    return res
-    
+  for (let i = 2 * (nums.length - 1); i >= 0; i--) {
+    let idx = i % nums.length;
+    while (stack.length > 0 && nums[idx] >= nums[stack.peek()]) {
+      stack.pop();
+    }
+    res[idx] = stack.length === 0 ? -1 : nums[stack.peek()];
+    stack.push(idx);
+  }
+
+  return res;
 };

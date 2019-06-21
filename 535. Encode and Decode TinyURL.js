@@ -4,17 +4,17 @@
 Design the encode and decode methods for the TinyURL service. There is no restriction on how your encode/decode algorithm should work. You just need to ensure that a URL can be encoded to a tiny URL and the tiny URL can be decoded to the original URL.
  */
 
- // method 1: easy hash map
+// method 1: easy hash map
 /**
  * Encodes a URL to a shortened URL.
  *
  * @param {string} longUrl
  * @return {string}
  */
-const map = new Map()
+const map = new Map();
 var encode = function(longUrl) {
-    map.set(map.size,longUrl)
-    return "http://tinyurl.com/" + (map.size -1)
+  map.set(map.size, longUrl);
+  return "http://tinyurl.com/" + (map.size - 1);
 };
 
 /**
@@ -24,7 +24,7 @@ var encode = function(longUrl) {
  * @return {string}
  */
 var decode = function(shortUrl) {
-    return map.get(parseInt(shortUrl.replace("http://tinyurl.com/","")))
+  return map.get(parseInt(shortUrl.replace("http://tinyurl.com/", "")));
 };
 
 /**
@@ -32,20 +32,21 @@ var decode = function(shortUrl) {
  * decode(encode(url));
  */
 
- // method 2 random number
+// method 2 random number
 
-const hashMap = new Map()
+const hashMap = new Map();
 
 var encode = function(longUrl) {
-    const encodeString = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let en = ""
-    for (let i = 0; i < 3; i++){
-        en += encodeString.charAt(Math.floor(Math.random() * encodeString.length))
-    }
-    hashMap.set(en, longUrl)
-    return "http://www.example.html/" + en
+  const encodeString =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let en = "";
+  for (let i = 0; i < 3; i++) {
+    en += encodeString.charAt(Math.floor(Math.random() * encodeString.length));
+  }
+  hashMap.set(en, longUrl);
+  return "http://www.example.html/" + en;
 };
 
 var decode = function(shortUrl) {
-    return hashMap.get(shortUrl.replace("http://www.example.html/",""))
+  return hashMap.get(shortUrl.replace("http://www.example.html/", ""));
 };

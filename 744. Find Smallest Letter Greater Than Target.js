@@ -35,20 +35,20 @@ target = "k"
 Output: "c"
 */
 var nextGreatestLetter = function(letters, target) {
-    let mid
-    let start = 0,
-        end = letters.length - 1
-    
-    while (start <= end){
-        mid = ~~((end + start)/2)
-        if(letters[mid].charCodeAt(0) > target.charCodeAt(0)){
-            end = mid - 1
-        }else{
-            start = mid + 1
-        }
+  let mid;
+  let start = 0,
+    end = letters.length - 1;
+
+  while (start <= end) {
+    mid = ~~((end + start) / 2);
+    if (letters[mid].charCodeAt(0) > target.charCodeAt(0)) {
+      end = mid - 1;
+    } else {
+      start = mid + 1;
     }
-    
-    return letters[start%(letters.length)]
+  }
+
+  return letters[start % letters.length];
 };
 
 /**
@@ -57,17 +57,17 @@ var nextGreatestLetter = function(letters, target) {
  * @return {character}
  */
 var nextGreatestLetter = function(letters, target) {
-    let mid
-    let start = 0,
-        end = letters.length
-    
-    while (start < end){
-        mid = start +  ~~((end - start)/2)
-        if(letters[mid].charCodeAt(0) > target.charCodeAt(0)){
-            end = mid
-        }else{
-            start = mid + 1
-        }
+  let mid;
+  let start = 0,
+    end = letters.length;
+
+  while (start < end) {
+    mid = start + ~~((end - start) / 2);
+    if (letters[mid].charCodeAt(0) > target.charCodeAt(0)) {
+      end = mid;
+    } else {
+      start = mid + 1;
     }
-    return letters[start%(letters.length)]
+  }
+  return letters[start % letters.length];
 };

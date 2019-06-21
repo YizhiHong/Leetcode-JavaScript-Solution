@@ -18,19 +18,19 @@
 */
 //O(kn) O(n)
 var nthSuperUglyNumber = function(n, primes) {
-    let DP = new Array(n).fill(Infinity)
-    DP[0] = 1
-    let idx = new Array(primes.length).fill(0)
-    for(let i = 1; i< n; i++){
-        for(let j = 0; j < primes.length; j++){
-            DP[i] = Math.min(DP[i],DP[idx[j]]*primes[j])
-        }
-        for(let j = 0; j < primes.length; j++){
-           if (DP[i] === DP[idx[j]]*primes[j]){
-               idx[j]++
-           }
-        }
+  let DP = new Array(n).fill(Infinity);
+  DP[0] = 1;
+  let idx = new Array(primes.length).fill(0);
+  for (let i = 1; i < n; i++) {
+    for (let j = 0; j < primes.length; j++) {
+      DP[i] = Math.min(DP[i], DP[idx[j]] * primes[j]);
     }
-    
-    return DP[n-1]
+    for (let j = 0; j < primes.length; j++) {
+      if (DP[i] === DP[idx[j]] * primes[j]) {
+        idx[j]++;
+      }
+    }
+  }
+
+  return DP[n - 1];
 };

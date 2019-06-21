@@ -10,18 +10,17 @@
  * @return {number}
  */
 var maxPathSum = function(root) {
-    let res = Number.MIN_SAFE_INTEGER // or Number.NEGATIVE_INFINITY
-    let _maxPathSum = (curr) => {
-        if (curr === null) return 0
-        let left = Math.max(_maxPathSum(curr.left),0)
-        let right = Math.max(_maxPathSum(curr.right),0)
-        
-        res = Math.max(res, left + right + curr.val)
-        return curr.val + Math.max(left,right)
-    }
-    
-    _maxPathSum(root)
-    
-    return res
-    
+  let res = Number.MIN_SAFE_INTEGER; // or Number.NEGATIVE_INFINITY
+  let _maxPathSum = curr => {
+    if (curr === null) return 0;
+    let left = Math.max(_maxPathSum(curr.left), 0);
+    let right = Math.max(_maxPathSum(curr.right), 0);
+
+    res = Math.max(res, left + right + curr.val);
+    return curr.val + Math.max(left, right);
+  };
+
+  _maxPathSum(root);
+
+  return res;
 };

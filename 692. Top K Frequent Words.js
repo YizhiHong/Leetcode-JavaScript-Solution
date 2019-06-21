@@ -20,57 +20,59 @@
 
 // sort O(nlogn) O(n)
 var topKFrequent = function(words, k) {
-    let hashMap = new Map()
-    
-    for(let w of words){
-        let val = hashMap.get(w) + 1 || 1
-        hashMap.set(w,val)
-    }
-    
-    return [...hashMap.keys()].sort((a,b) => {
-        if (hashMap.get(a) > hashMap.get(b)) {
-            return -1;
-        }else if (hashMap.get(a)< hashMap.get(b)) {
-            return 1;
-        }else {
-            if (a < b) return -1;
-            if (a > b) return 1;
-            return 0;
-        }
-    }).slice(0,k)
+  let hashMap = new Map();
+
+  for (let w of words) {
+    let val = hashMap.get(w) + 1 || 1;
+    hashMap.set(w, val);
+  }
+
+  return [...hashMap.keys()]
+    .sort((a, b) => {
+      if (hashMap.get(a) > hashMap.get(b)) {
+        return -1;
+      } else if (hashMap.get(a) < hashMap.get(b)) {
+        return 1;
+      } else {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+      }
+    })
+    .slice(0, k);
 };
 
 //bucket O(n) O(n)
 var topKFrequent = function(words, k) {
-    let set = Array.from(new Set([...words])),
-        hashMap = new Map( set.map(w => [w,0])),
-        max = 0
-    
-    for(let w of words){
-        let val = hashMap.get(w) + 1
-        hashMap.set(w,val)
-        if(val > max) max = val
+  let set = Array.from(new Set([...words])),
+    hashMap = new Map(set.map(w => [w, 0])),
+    max = 0;
+
+  for (let w of words) {
+    let val = hashMap.get(w) + 1;
+    hashMap.set(w, val);
+    if (val > max) max = val;
+  }
+
+  let bucket = new Array(max).fill(null);
+
+  for (let [key, count] of hashMap.entries()) {
+    if (bucket[count]) {
+      bucket[count].push(key);
+    } else {
+      bucket[count] = [key];
     }
-    
-    let bucket = new Array(max).fill(null)
-    
-    for( let [key,count] of hashMap.entries()){
-        if(bucket[count]){
-            bucket[count].push(key)
-        }else{
-            bucket[count] = [key]
-        }
+  }
+
+  let res = [];
+  for (let i = bucket.length - 1; i >= 0; i--) {
+    if (bucket[i]) {
+      if (bucket.length > 1) bucket[i].sort();
+      res.push(...bucket[i]);
     }
-    
-    let res = []
-    for(let i = bucket.length -1; i>= 0;i--){
-        if (bucket[i]) {
-            if(bucket.length > 1) bucket[i].sort()
-            res.push(...bucket[i])
-        }
-        if(k < res.length){
-            return res.slice(0,k)
-        }else if(k === res.length) return res
-    }
-    return res
+    if (k < res.length) {
+      return res.slice(0, k);
+    } else if (k === res.length) return res;
+  }
+  return res;
 };

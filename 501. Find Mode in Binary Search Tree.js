@@ -27,56 +27,52 @@ Follow up: Could you do that without using any extra space? (Assume that the imp
 
 // Solution 1: O(n) O(n)
 var findMode = function(root) {
-    let res = new Map()
-    let travel = (curr) => {
-        if(curr === null) return;
-        if(res.has(curr.val)){
-            res.set(curr.val, res.get(curr.val)+1)
-        }else{
-            res.set(curr.val, 1)
-        }
-        travel(curr.left,curr)
-        travel(curr.right,curr)
+  let res = new Map();
+  let travel = curr => {
+    if (curr === null) return;
+    if (res.has(curr.val)) {
+      res.set(curr.val, res.get(curr.val) + 1);
+    } else {
+      res.set(curr.val, 1);
     }
-    travel(root)
-    let maxOccur = Math.max(...res.values())
-    let arr = new Set()
-    res.forEach(function(value, key) {
-      if(value === maxOccur) arr.add(key)
-    });
-    return Array.from(arr)
+    travel(curr.left, curr);
+    travel(curr.right, curr);
+  };
+  travel(root);
+  let maxOccur = Math.max(...res.values());
+  let arr = new Set();
+  res.forEach(function(value, key) {
+    if (value === maxOccur) arr.add(key);
+  });
+  return Array.from(arr);
 };
 // Solution 2: O(n) O(1)
 
 var findMode = function(root) {
-    let res = [],
-        count = 1,
-        maxCount = 0,
-        prev = null
-    
-    const inOrder = (curr) =>{
-        if(!curr) return;
-        
-        inOrder(curr.left)
-        
-        if(prev !== null) {
-            count = (prev === curr.val) ? count + 1 : 1
-        }
-        if(count >= maxCount){
-            if (count > maxCount) res = []
-            res.push(curr.val)
-            maxCount = count
-        }
-        prev = curr.val
-        
-        inOrder(curr.right)
+  let res = [],
+    count = 1,
+    maxCount = 0,
+    prev = null;
+
+  const inOrder = curr => {
+    if (!curr) return;
+
+    inOrder(curr.left);
+
+    if (prev !== null) {
+      count = prev === curr.val ? count + 1 : 1;
     }
-    
-    inOrder(root)
-    
-    return res
-        
+    if (count >= maxCount) {
+      if (count > maxCount) res = [];
+      res.push(curr.val);
+      maxCount = count;
+    }
+    prev = curr.val;
+
+    inOrder(curr.right);
+  };
+
+  inOrder(root);
+
+  return res;
 };
-
-
-

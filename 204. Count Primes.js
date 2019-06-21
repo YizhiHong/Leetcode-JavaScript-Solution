@@ -3,20 +3,20 @@
  * @return {number}
  */
 var countPrimes = function(n) {
-    if (n <= 1) return 0
-    const isPrimes = (k) => {
-        for (let i = 2; i <= k**0.5 ; i++){
-            if (k%i === 0) return false
-        }
-        return true
+  if (n <= 1) return 0;
+  const isPrimes = k => {
+    for (let i = 2; i <= k ** 0.5; i++) {
+      if (k % i === 0) return false;
     }
-    
-    let count = 0
-    for (let i = 2; i<n ;i++){
-        if(isPrimes(i)) count ++
-    }
-    
-    return count    
+    return true;
+  };
+
+  let count = 0;
+  for (let i = 2; i < n; i++) {
+    if (isPrimes(i)) count++;
+  }
+
+  return count;
 };
 
 /**
@@ -45,20 +45,18 @@ To find all the prime numbers less than or equal to a given integer n by Eratost
      Output: all i such that A[i] is true.
 */
 var countPrimes = function(n) {
-        
-    if (n <= 2) return 0
-    
-    let sieve = new Array(n).fill(true);
-    
-    for (let i = 2; i < n**0.5 ; i++){
-        if (sieve[i]) {
-            for (let j = i**2 ; j < n; j = j + i) sieve[j] = false;
-        }
-    }
-    // filter out first two true
-    return sieve.filter((val) => val).length - 2
-};
+  if (n <= 2) return 0;
 
+  let sieve = new Array(n).fill(true);
+
+  for (let i = 2; i < n ** 0.5; i++) {
+    if (sieve[i]) {
+      for (let j = i ** 2; j < n; j = j + i) sieve[j] = false;
+    }
+  }
+  // filter out first two true
+  return sieve.filter(val => val).length - 2;
+};
 
 /** 
 This algorithm produces all primes not greater than n. It includes a common optimization, which is to start enumerating the multiples of each prime i from i2. The time complexity of this algorithm is O(n log log n), provided the array update is an O(1) operation, as is usually the case. 

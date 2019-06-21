@@ -15,18 +15,15 @@ G(n)=∑i=1nG(i−1)⋅G(n−i)(3) G(n) = \sum_{i=1}^{n}G(i-1) \cdot G(n-i) \qqu
  * @return {number}
  */
 var numTrees = function(n) {
-    
-    let res = new Array(n+1).fill(0)
-    res[0] = 1
-    res[1] = 1
-    
-    for(let i = 2; i < n+1 ;i++){
-        for(let j = 1 ; j < i+1; j++){
-            res[i] += res[j-1]*res[i-j]
-        }
+  let res = new Array(n + 1).fill(0);
+  res[0] = 1;
+  res[1] = 1;
+
+  for (let i = 2; i < n + 1; i++) {
+    for (let j = 1; j < i + 1; j++) {
+      res[i] += res[j - 1] * res[i - j];
     }
-        
-        
-    return res[n]
-    
+  }
+
+  return res[n];
 };

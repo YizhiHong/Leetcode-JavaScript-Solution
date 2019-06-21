@@ -9,37 +9,36 @@
  * @param {TreeNode} root
  * @return {number}
  */
- /** Recursive **/
+/** Recursive **/
 var maxDepth = function(root) {
-    if(root === null) return 0
+  if (root === null) return 0;
 
-    let left = 1
-    let right = 1 
-    
-    left += maxDepth(root.left)
-    right += maxDepth(root.right)
-    
-    return Math.max(left,right)
+  let left = 1;
+  let right = 1;
+
+  left += maxDepth(root.left);
+  right += maxDepth(root.right);
+
+  return Math.max(left, right);
 };
 
- /** iterative **/
+/** iterative **/
 var maxDepth = function(root) {
-    if(root === null) return 0
-    
-    let level = 1;
-    let curr = root;
-    let queue = []
-    queue.unshift([curr,1])
-    
-    while(queue.length > 0){
-        [curr,level] = queue.pop()
-        if(curr.left !== null) {
-            queue.unshift([curr.left,level +1])
-        }
-        if(curr.right !== null) {
-            queue.unshift([curr.right,level +1])
-        }
-        
+  if (root === null) return 0;
+
+  let level = 1;
+  let curr = root;
+  let queue = [];
+  queue.unshift([curr, 1]);
+
+  while (queue.length > 0) {
+    [curr, level] = queue.pop();
+    if (curr.left !== null) {
+      queue.unshift([curr.left, level + 1]);
     }
-    return level
+    if (curr.right !== null) {
+      queue.unshift([curr.right, level + 1]);
+    }
+  }
+  return level;
 };
