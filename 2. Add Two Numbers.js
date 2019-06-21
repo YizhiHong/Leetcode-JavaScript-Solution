@@ -20,29 +20,28 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    let curry = 0,
-        total = 0,
-        a = 0,
-        b = 0
-    let start = new ListNode(0),
-        curr = start
-    
-    while(l1 !== null || l2 !== null){
-        a = l1 !== null ? l1.val : 0
-        b = l2 !== null ? l2.val : 0
-        
-        total = curry + a + b
-        total >= 10 ? curry = 1 : curry = 0
-        
-        l1 !== null ? l1 = l1.next : null
-        l2 !== null ? l2 = l2.next : null
-        
-        curr.next = new ListNode(total%10)
-        curr = curr.next
-    }
-    
-    if(curry > 0) curr.next = new ListNode(curry)
-    
-    return start.next
-    
+  let curry = 0,
+    total = 0,
+    a = 0,
+    b = 0;
+  let start = new ListNode(0),
+    curr = start;
+
+  while (l1 !== null || l2 !== null) {
+    a = l1 !== null ? l1.val : 0;
+    b = l2 !== null ? l2.val : 0;
+
+    total = curry + a + b;
+    total >= 10 ? (curry = 1) : (curry = 0);
+
+    l1 !== null ? (l1 = l1.next) : null;
+    l2 !== null ? (l2 = l2.next) : null;
+
+    curr.next = new ListNode(total % 10);
+    curr = curr.next;
+  }
+
+  if (curry > 0) curr.next = new ListNode(curry);
+
+  return start.next;
 };
