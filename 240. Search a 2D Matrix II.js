@@ -34,3 +34,21 @@ var searchMatrix = function (matrix, target) {
   }
   return false
 };
+
+//or
+var searchMatrix = function(matrix, target) { 
+  if (matrix.length === 0) return false
+  let col = matrix[0].length-1, row = 0
+  while( row < matrix.length && col >= 0 ){
+      if(matrix[row][col] > target){
+          col-- 
+      }else if(matrix[row][col] < target ){
+          row++
+      }else{
+          return true
+      }
+  }
+  return false
+};
+
+// Method 2: Divide and Conquer O(nlgn) O(lgn)
