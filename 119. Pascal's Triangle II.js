@@ -19,20 +19,11 @@ Could you optimize your algorithm to use only O(k) extra space?
  * @param {number} rowIndex
  * @return {number[]}
  */
-var getRow = function(rowIndex) {
-  if(rowIndex <= 0) return [1]
-  if(rowIndex == 1) return [1,1]
-  
-  let row,
-      curr = new Array(2).fill(1)
-  
-  for (let i = 1; i < rowIndex+1; i++){
-      row = curr
-      curr = new Array(row.length+1).fill(1)
-      for(let j = 1; j < curr.length - 2; j++){
-          curr[j] = row[j -1]+row[j]
-      }
-  }
-  curr.pop()
-  return curr
+var getRow = function (rowIndex) {
+  let res = new Array(rowIndex + 1).fill(0)
+  res[0] = 1
+  for (let i = 1; i < rowIndex + 1; i++)
+    for (let j = i; j >= 1; j--)
+      res[j] += res[j - 1];
+  return res;
 };
