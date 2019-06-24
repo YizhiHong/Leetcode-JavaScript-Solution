@@ -40,6 +40,8 @@ Could you devise a constant space solution?
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
+
+// method1: O(MxN) O(M+N)
 var setZeroes = function (matrix) {
   // if(matrix.length === 0) return
   let col = matrix[0].length,
@@ -65,3 +67,5 @@ var setZeroes = function (matrix) {
   }
 
 };
+
+// method2: O(MxN) O(1)

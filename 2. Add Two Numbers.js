@@ -19,29 +19,41 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
-  let curry = 0,
-    total = 0,
-    a = 0,
-    b = 0;
-  let start = new ListNode(0),
-    curr = start;
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function (l1, l2) {
+  let a = 0,
+    b = 0,
+    carry = 0,
+    total = 0
+  let head = new ListNode(0),
+    curr = head
 
   while (l1 !== null || l2 !== null) {
-    a = l1 !== null ? l1.val : 0;
-    b = l2 !== null ? l2.val : 0;
+    a = l1 ? l1.val : 0
+    b = l2 ? l2.val : 0
 
-    total = curry + a + b;
-    total >= 10 ? (curry = 1) : (curry = 0);
+    total = carry + a + b
+    carry = total > 9 ? 1 : 0
 
-    l1 !== null ? (l1 = l1.next) : null;
-    l2 !== null ? (l2 = l2.next) : null;
+    l1 = l1 ? l1.next : null
+    l2 = l2 ? l2.next : null
 
-    curr.next = new ListNode(total % 10);
-    curr = curr.next;
+    curr.next = new ListNode(total % 10)
+    curr = curr.next
+
   }
+  if (carry > 0) curr.next = new ListNode(carry)
 
-  if (curry > 0) curr.next = new ListNode(curry);
-
-  return start.next;
+  return head.next
 };
