@@ -13,7 +13,7 @@ Output: "bb"
  */
 
 // dp O(n^2) O(n^2)
-var longestPalindrome = function(s) {
+var longestPalindrome = function (s) {
   let dp = new Array(s.length).fill(new Array(s.length)),
     res = "";
 
@@ -36,24 +36,69 @@ var longestPalindrome = function(s) {
  * @param {string} s
  * @return {string}
  */
-var longestPalindrome = function(s) {
-  let res = "";
-  for (let i = 0; i < s.length; i++) {
-    _lp(i, i);
-    _lp(i, i + 1);
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function (s) {
+  if (s.length < 2) { // if any string less than 2, It's Palindrome.
+    return s;
   }
-  function _lp(left, right) {
-    while (
-      left >= 0 &&
-      right <= s.length &&
-      s.charAt(left) === s.charAt(right)
-    ) {
-      left--;
-      right++;
-    }
-    let curr = s.substring(left + 1, right);
-    if (curr.length > res.length) res = curr;
+  let res = ""
+  for (let i = 0; i < s.length; i++) {
+    expandAroundCenter(i, i) // make sure even works
+    expandAroundCenter(i, i + 1) // make sure oad works
   }
 
-  return res;
+  function expandAroundCenter(left, right) {
+    // if left and right in range and equal.
+    while (left >= 0 && right <= s.length && s.charAt(left) === s.charAt(right)) {
+      left--
+      right++
+    }
+    let curr = s.substring(left + 1, right)
+    if (curr.length > res.length) res = curr // check if it's max longest
+
+  }
+
+  return res
+};
+
+// 
+var longestPalindrome = function (s) {
+  let len = s.length;
+  let start = 0;
+  let end = 0;
+  let i = 0;
+  let left;
+  let right;
+  let array = s.split('');
+  if (s.length < 2) {
+    return s;
+  }
+  for (i; i < len;) {
+    left = i;
+    right = i;
+
+    if (len - i <= 0) {
+      break;
+    }
+    while (right < (len - 1) && array[right + 1] === array[right]) {
+      right++;
+    }
+    i = right + 1;
+
+    while (right < (len - 1) && left > 0 && array[right + 1] === array[left - 1]) {
+      right++;
+      left--;
+    }
+    let distance = right - left + 1;
+
+    if (end < distance) {
+      end = distance;
+      start = left;
+    }
+  }
+
+  return s.substr(start, end);
 };
