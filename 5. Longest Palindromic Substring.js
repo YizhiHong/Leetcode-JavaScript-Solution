@@ -66,13 +66,12 @@ var longestPalindrome = function (s) {
 
 // 
 var longestPalindrome = function (s) {
-  let len = s.length;
-  let start = 0;
-  let end = 0;
-  let i = 0;
-  let left;
-  let right;
-  let array = s.split('');
+  let len = s.length,
+    start = 0,
+    end = 0,
+    i = 0,
+    left, right, array = s.split('');
+    
   if (s.length < 2) {
     return s;
   }
